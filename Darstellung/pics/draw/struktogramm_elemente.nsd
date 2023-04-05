@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.32-11" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" author="pad" created="2023-03-17" changedby="pad" changed="2023-03-20" origin="Structorizer 3.32-06" text="&#34;Elemente&#34;" comment="" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;Anweisung 1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Anweisung n&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<alternative text="&#34;Verzweigung&#34;" comment="" color="ffffff" disabled="0">
+			<qTrue>
+				<instruction text="&#34;Anweisung TRUE&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qTrue>
+			<qFalse>
+				<instruction text="&#34;Anweisung FALSE&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qFalse>
+		</alternative>
+		<case text="&#34;Fallabfrage / Switch Case&#34;,&#34;a =1&#34;,&#34;a =2&#34;,&#34;a =3&#34;,&#34;default (else)&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+			<qCase>
+				<instruction text="&#34;Case 1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qCase>
+			<qCase>
+				<instruction text="&#34;Case 2&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qCase>
+			<qCase>
+				<instruction text="&#34;Case 3&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qCase>
+			<qCase>
+				<instruction text="&#34;defaultCase&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qCase>
+		</case>
+		<for text="&#34;for i &#60;- 0 to 10 / foreach i in Kollektion / while Bedingung&#34;" comment="" counterVar="i" startValue="" stepConst="" style="FREETEXT" color="ffffff" disabled="0">
+			<qFor>
+				<instruction text="&#34;Anweisung 1&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+				<instruction text="&#34;Anweisung 2&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qFor>
+		</for>
+	</children>
+</root>
