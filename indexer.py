@@ -36,7 +36,7 @@ class Indexer:
 if __name__ == "__main__":
     indexer = Indexer()
     indexer.compose()
-    print("\nIndexfile wurde geschrieben")
+    print("\nIndexfile wurde geschrieben\n")
 
 
 
