@@ -105,3 +105,8 @@ class Mapper:
                 mdList.append(key+file)
         return mdList
 
+    def readFile(self, filePath:str) -> list:
+        """ließt File ein und gibt File-Liste zurück"""
+        with open (filePath, "r") as f: 
+            fileList = f.readlines()
+        return fileList
