@@ -81,6 +81,7 @@ class MarkdownFinisher(Mapper):
             for ind in topbuttonIndex:
                 readFile.insert(ind + inserted, self.topbutton)   
                 inserted += 1  
+            inhaltsangabe.append("\n")
             retList = inhaltsangabe + readFile
             with open (file, "w") as f:
                 f.writelines(retList)
