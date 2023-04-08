@@ -1,6 +1,8 @@
 # [back](../index.html)
 
 # Inhaltsangabe
+- [back](#back)
+- [Inhaltsangabe](#inhaltsangabe)
 - [Anomalien](#anomalien)
 - [Kreuztabelle](#kreuztabelle)
 - [Vergleich Excel-Datenbank](#vergleich-excel-datenbank)
@@ -17,19 +19,19 @@ Bei einer n:m-Beziehung wird eine Zwischentabelle erzeugt.
 Der Primary Key von der 1er Tabelle wird zum Foreign key der N Tabelle
 
 # Vergleich Excel-Datenbank
-		
-		Excel			|		Datenbank
-		---			|	----
-excel ausgelegt für wenige Nutzer 	|	Datenbank für sehr viele Nutzer
-keine referenzielle Integrität		|	referenzielle Integrität
-					|	logging von Zugriffen
-					|	feinere Benutzerverwaltung
-					| 	rollbackfunction, Datenänderung erst bei commit
-redundanz spielt keine Rolle		| 	redundanzen werden vermieden 
-					| 	Datenbanken hat eigenes
+
+|Excel			|		Datenbank|
+|	---		|	--- |
+|excel ausgelegt für wenige Nutzer 	 |	Datenbank für sehr viele Nutzer
+|keine referenzielle Integrität		|	referenzielle Integrität
+|					|	logging von Zugriffen
+|					|	feinere Benutzerverwaltung
+|					| 	rollbackfunction, Datenänderung erst bei commit
+|redundanz spielt keine Rolle		| 	redundanzen werden vermieden 
+|					| 	Datenbanken hat eigenes
 
 # Notes
 referenzielle Integrität: Ein FK-Wert kann nur eingetragen werden, wenn die zugehörige PK-Wert existiert
 
-Kardinalität: n:m:1
+Kardinalität: n : m :1
 Entity: Grundstück

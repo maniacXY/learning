@@ -1,0 +1,61 @@
+<h1 id="back"><a href="../index.html">back</a></h1>
+<h1 id="inhaltsangabe">Inhaltsangabe</h1>
+<ul>
+<li><a href="#back">back</a></li>
+<li><a href="#inhaltsangabe">Inhaltsangabe</a></li>
+<li><a href="#anomalien">Anomalien</a></li>
+<li><a href="#kreuztabelle">Kreuztabelle</a></li>
+<li><a href="#vergleich-excel-datenbank">Vergleich Excel-Datenbank</a></li>
+<li><a href="#notes">Notes</a></li>
+</ul>
+<h1 id="anomalien">Anomalien</h1>
+<ul>
+<li>Löschanomalie: bei bewusstem Löschen eines Datensatzes gehen unbewusst Informationen eines anderen Datensatzes verloren</li>
+<li>Einfügeanomalie: führt zu Inkonsistenz bei nicht vollständiger Dateneingabe oder wenn ein Wert vergessen wird, wird gar nichts eingefügt</li>
+<li>Aktualisierungs-/Änderungsanomalie: Inkonsistenz der Daten wenn nicht atomar und an meheren Stellen verfügbar, somit ist nicht klar welcher Wert korrekt ist</li>
+</ul>
+<h1 id="kreuztabelle">Kreuztabelle</h1>
+<p>Bei einer n:m-Beziehung wird eine Zwischentabelle erzeugt.</p>
+<p>Der Primary Key von der 1er Tabelle wird zum Foreign key der N Tabelle</p>
+<h1 id="vergleich-excel-datenbank">Vergleich Excel-Datenbank</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Excel</th>
+<th>Datenbank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>excel ausgelegt für wenige Nutzer</td>
+<td>Datenbank für sehr viele Nutzer</td>
+</tr>
+<tr class="even">
+<td>keine referenzielle Integrität</td>
+<td>referenzielle Integrität</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>logging von Zugriffen</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>feinere Benutzerverwaltung</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>rollbackfunction, Datenänderung erst bei commit</td>
+</tr>
+<tr class="even">
+<td>redundanz spielt keine Rolle</td>
+<td>redundanzen werden vermieden</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Datenbanken hat eigenes</td>
+</tr>
+</tbody>
+</table>
+<h1 id="notes">Notes</h1>
+<p>referenzielle Integrität: Ein FK-Wert kann nur eingetragen werden, wenn die zugehörige PK-Wert existiert</p>
+<p>Kardinalität: n : m :1 Entity: Grundstück</p>
