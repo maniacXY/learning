@@ -1,21 +1,19 @@
-import os
-from glob import glob
+from programm.Mapping import Mapper
 
 class Indexer:
     def __init__(self) -> None:
         self.htmlstring =""
+        self.mapper = Mapper()
+
     def __str__(self) -> str:
         return "index.html wird erstellt"
     def compose(self):
-        folder = glob("./*/", recursive=True)
         # setting file up
         self.htmlstring = self.ueberschrift()
-        for dir in folder:
-            files = os.listdir(f"./{dir}")
+        for dir in self.mapper.getDirs():
             filelist = []
-            for file in files:
-                if "html" in file[-4:]:
-                    filelist.append(file)
+            for file in self.mapper.getFolderFiles(dir, "html"):
+                filelist.append(file)
             self.htmlstring += self.chapter(dir, filelist)
         self.writeFile()
         

@@ -63,12 +63,19 @@ class Mapper:
     
     def getDirs(self) -> list:
         keys = self.__mappping.keys()
-        return keys
+        retlist = []
+        for item in keys: 
+            if item != "questionFiles":
+                retlist.append(item)
+        return retlist
 
     def getQuestionFiles(self) -> list:
         return self.__mappping["questionFiles"]
 
     def getHTMLFiles(self) -> list:
+        """
+        returns .hmtl files in a list
+        """
         keys = self.__folders
         htmlList= []
         for key in keys:
@@ -77,14 +84,24 @@ class Mapper:
                 for file in tmplist:
                     htmlList.append(key+file)
         return htmlList
+    
+    def getFolderFiles(self, folder:str, format:str) -> list:
+        """ retuns Files of a Folder. Format html/md"""
+        formater = format.lower()
+        if format == "md":
+            formater = "mdFiles"
+        if formater == "html":
+            formater = "htmlFiles"
+        filelist = self.__mappping[folder][formater]
+        return filelist
 
     def getMDFiles(self) -> list:
         keys = self.__folders
         mdList= []
         for key in keys:
-            if key is not "questionFiles":
-                tmplist = self.__mappping[key]["mdFiles"]    
-                for file in tmplist:
-                    mdList.append(key+file)
+            
+            tmplist = self.__mappping[key]["mdFiles"]    
+            for file in tmplist:
+                mdList.append(key+file)
         return mdList
 

@@ -1,34 +1,26 @@
-from programm.Files import *
+#from programm.zzzFiles import *
 from programm.Mapping import *
 from programm.Converter import *
-
-files = GetAllFiles()
-
-
-#files.mapDirFiles()
-##files.notIncluded.printNotIncluded()
-#listofObjects = files.FileCollection
-#
-#
-# 
-# print("STUFF")
-
-
+from programm.Indexer import *
 
 mapping = Mapper()
 conv = Converter()
-mapping.printDict()
+indexer = Indexer()
+#mapping.printDict()
 
 
-print(mapping.getMDFiles())
+# print(mapping.getMDFiles())
 
 
-print(mapping.getMDFiles() == mapping.getHTMLFiles())
+# print(mapping.getMDFiles() == mapping.getHTMLFiles())
 
-print(mapping.getHTMLFiles())
-print(mapping.getMDFiles())
+# print(mapping.getHTMLFiles())
+# print(mapping.getMDFiles())
+folder = mapping.getDirs()
+print(folder)
+print(mapping.getFolderFiles(folder[-1],"html"))
 
 for path in mapping.getMDFiles():
     conv.MDtoHTML(path)
 
-
+indexer.compose()
