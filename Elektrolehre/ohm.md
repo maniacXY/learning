@@ -39,6 +39,7 @@ Uges = U1 = U2
 Iges = I1 + I2 + In
 
 [TOP](#)
+
 # Widerstand
 der Widerstand ist kontant
 
@@ -48,6 +49,7 @@ P -> W(att)
 W = U * I 
 
 [TOP](#)
+
 # Schein-Wirkleistung
 cos(phi) ist meist 0,85, Scheinleistung immer kleiner als Wirkleistung
 

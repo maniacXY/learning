@@ -26,7 +26,7 @@ markdown = MarkdownFinisher()
 #folder = mapping.getDirs()
 #print(folder)
 #print(mapping.getFolderFiles(folder[-1],"html"))
-markdown.inhaltsangabeTopButtons()
+#markdown.inhaltsangabeTopButtons()
 for path in mapping.getMDFiles():
     conv.MDtoHTML(path)
 

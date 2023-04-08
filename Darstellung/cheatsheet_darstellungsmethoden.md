@@ -1,5 +1,8 @@
 # [BACK](../index.html)
 # Inhaltsangabe
+- [BACK](#back)
+- [Inhaltsangabe](#inhaltsangabe)
+- [Datenbanken ERM](#datenbanken-erm)
 - [SQL-Datenbankdarstellung](#sql-datenbankdarstellung)
 	- [ER-Chen](#er-chen)
 	- [Physisches Modell](#physisches-modell)
@@ -18,6 +21,7 @@
 Das ERM ist ein Modell(zur Darstellung) von Dingen, Gegenständen, Objekten (= 'entities') und der Beziehung/Zusammenhängen zwischen diesen (= 'relationship'). Es dient dazu, im Rahmen der semantischen (abstrakt, formale Beschreibung / Darstellung eines Ausschnittes) Datenmodellierung vereinfacht darzustellen.
 
 [TOP](#)
+
 # SQL-Datenbankdarstellung
 Darstellung in vielen SQL-Datenbankensystemen um die Beziehungen zwischen den bestehenden Tables darzustellen
 Darstellung wie Datenbank tatsächlich modelliert wird mit PK,FK, ggf auch Datentypen
@@ -38,6 +42,7 @@ ER Chen Beisspiel 2
 ![pyhsisches Modell](pics/erm_physischeER.png)
 
 [TOP](#)
+
 # Anwendungsentwicklung
 ## Struktogramm
 *Nassi-Schneidermann-Diagramm*
@@ -60,6 +65,7 @@ PAP-Beisspiel
 ![PAP Beisspiel](pics/pap_beisspiel.png)
 
 [TOP](#)
+
 # UML
 *unified modeling language*
 
@@ -87,6 +93,7 @@ UML Anwendungsdiagramm-beisspiel
 ![UML Anwendungsfalldiagramm-beisspiel](pics/UML_Anwendungsfalldiagramm_beisspiel.png)
 
 [TOP](#)
+
 # EPK
 *ereignisgesteuerte  Prozesskette*
 
@@ -99,6 +106,7 @@ EPK_Beisspiel
 ![EPK-Beisspiel](pics/epk_bsp.png)
 
 [TOP](#)
+
 # Entscheidungstabelle
 Alle Möglichkeiten werden mittels Bedingung -> Aktion erfasst. Bei 3 Aktionen gibt es 2^3 Möglichkeiten
 

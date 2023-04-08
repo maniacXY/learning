@@ -28,7 +28,7 @@ class MarkdownFinisher(Mapper):
     def __init__(self) -> None:
         super().__init__()
         self.backbutton = "# [BACK](../index.html)\n"
-        self.topbutton = "[TOP](#)\n"
+        self.topbutton = "[TOP](#)\n\n"
         self.topbuttons = False
 
     def __linkConverter(self, linkToConvert:str) -> str:
