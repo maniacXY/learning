@@ -100,7 +100,7 @@ class HTMLFinisher(Mapper):
         self.readHeaderFooter(placeHolder)
 
     def readHeaderFooter(self, placeHolder:str) -> None:
-        self.__header = self.replaceStyleCSS(self.__templatePath+self.__nameHeader, placeHolder)
+        self.__header = self.replaceStyleCSS(self.__templatePath+self.__nameHeader, placeHolder, "../style.css")
         with open(self.__templatePath+ self.__nameFooter, "r") as f:
             tmplist = f.readlines()
         self.__footer = tmplist

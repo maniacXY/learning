@@ -113,7 +113,7 @@ class Mapper(Converter):
             fileList = f.readlines()
         return fileList
 
-    def replaceStyleCSS(self, headerPath:str, placeHolder:str):
+    def replaceStyleCSS(self, headerPath:str, placeHolder:str, pathStyle :str):
         with open (headerPath, "r") as f:
             file = f.readlines()
         for i in range(len(file)):

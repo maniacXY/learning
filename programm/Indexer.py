@@ -4,7 +4,7 @@ from pprint import pprint
 class Indexer(Mapper):
     def __init__(self, pathToHeader, placeHolder) -> None:
         super().__init__()
-        self.htmlstringList = self.replaceStyleCSS(pathToHeader, placeHolder)
+        self.htmlstringList = self.replaceStyleCSS(pathToHeader, placeHolder, "./style.css")
         self.placeholder = "<PLACEHOLDER>"
         self.__compose()
         
