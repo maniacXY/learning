@@ -118,6 +118,6 @@ class Mapper(Converter):
             file = f.readlines()
         for i in range(len(file)):
             if placeHolder in file[i]:
-                file[i] = file[i].replace(placeHolder, "./style.css")
+                file[i] = file[i].replace(placeHolder, pathStyle)
         
         return file
