@@ -65,10 +65,19 @@ class MarkdownFinisher(Mapper):
                 continue
             else:
                 counter = 0
+                removeEmptySpace = []
+                for i in range(len(readFile)):
+                    if self.topbutton in readFile[i] or self.topbutton2 in readFile[i]:
+                        removeEmptySpace.append(i)
+                        counter+=1
+                counter = 0
+                for num in removeEmptySpace:
+                    readFile.pop(num - counter)
+                    counter +=1
                 for line in readFile:
                     if self.topbutton in line or self.topbutton2 in line:
                         readFile.remove(line)
-                        readFile.remove(counter-1)
+                        
                     counter += 1
                         
                 inhaltsangabe = [self.backbutton ,"# Inhaltsangabe\n"]
@@ -90,17 +99,11 @@ class MarkdownFinisher(Mapper):
                 inserted = 0
                 topbuttonIndex.pop(0)
                 for ind in topbuttonIndex:
+                    #readFile.pop(ind-inserted)
                     readFile.insert(ind + inserted, self.topbutton)   
                     inserted += 1  
                 inhaltsangabe.append("\n")
                 retList = inhaltsangabe + readFile
-                pprint(retList)
-              
-                
-                        
-                
-
-
                 with open (file, "w") as f:
                     f.writelines(retList)
         

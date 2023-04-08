@@ -1,7 +1,5 @@
 # [BACK](../index.html)
 # Inhaltsangabe
-- [BACK](#back)
-- [Inhaltsangabe](#inhaltsangabe)
 - [Elektolehre Basics](#elektolehre-basics)
 	- [Spannungseinheiten](#spannungseinheiten)
 	- [Verhätnisse-Quotienten](#verhätnisse-quotienten)
