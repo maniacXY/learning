@@ -1,5 +1,6 @@
 # [BACK](../index.html)
 # Inhaltsangabe
+- [Elektolehre Basics](#elektolehre-basics)
 	- [Spannungseinheiten](#spannungseinheiten)
 	- [Verhätnisse-Quotienten](#verhätnisse-quotienten)
 	- [Potentialunterschied](#potentialunterschied)
@@ -40,6 +41,8 @@ Iges = I1 + I2 + In
 
 [TOP](#)
 
+[TOP](#)
+
 # Widerstand
 der Widerstand ist kontant
 
@@ -47,6 +50,8 @@ der Widerstand ist kontant
 P -> W(att)
 
 W = U * I 
+
+[TOP](#)
 
 [TOP](#)
 

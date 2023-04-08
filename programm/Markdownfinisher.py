@@ -63,7 +63,7 @@ class MarkdownFinisher(Mapper):
                 continue
             inhaltsangabe = [self.backbutton ,"# Inhaltsangabe\n"]
             
-            for i in range(1,len(readFile)):
+            for i in range(len(readFile)):
                 line = readFile[i]
                 
                 if "##" in line[:4]:
@@ -77,6 +77,7 @@ class MarkdownFinisher(Mapper):
                     topbuttonIndex.append(i)
                     inhaltsangabe.append(headerhigh)
             inserted = 0
+            topbuttonIndex.pop(0)
             for ind in topbuttonIndex:
                 readFile.insert(ind + inserted, self.topbutton)   
                 inserted += 1  
