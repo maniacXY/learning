@@ -1,14 +1,11 @@
-# [Back](../index.html)
+# [BACK](../index.html)
 # Inhaltsangabe
-- [Definition](#definition)
 - [Methoden](#methoden)
-	- [3-2-1-Regel](#3-2-1-regel)
-- [Backupstrategien](#backup-strategien)
-	- [FIFO - First in first out](#fifo)
+	- [3-2-1 Regel](#3-2-1-regel)
+- [Backup Strategien](#backup-strategien)
+	- [Fifo](#fifo)
 	- [Generationenprinzip](#generationenprinzip)
-	- [Türme von Hanoi](#tuerme-von-hanoi)
-	
-[GroßvaterVaterSohn](#großvatervatersohn)
+	- [Tuerme von Hanoi](#tuerme-von-hanoi)
 
 # Definition
 Datensicherung bezeichnet Kopieren von Daten um sie ggf wiederherstellen zu können. Elementare Maßnahme zur Datensicherheit
@@ -19,10 +16,12 @@ Differenziell: Differenz zum letzten Voll-Backup
 
 Inkrementell: Änderungen seit dem letzten Backup (inkrementell, diff, voll); ganze Kette muss vorhanden sein um alle Daten herstellen zu können
 
+[TOP](#)
 # Methoden
 ## 3-2-1 Regel
 3 Backupkopien, 2 versch Datenträger (Platte, CD), 1 Kopie an einem separaten Ort (im falle elementarer Schäden)
 
+[TOP](#)
 # Backup Strategien
 ## Fifo
 einfachste Backupstrategie. Wird 2. Datenträger langsam voll wird der erste Datenträger überschrieben

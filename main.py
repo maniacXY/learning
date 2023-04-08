@@ -26,22 +26,8 @@ markdown = MarkdownFinisher()
 #folder = mapping.getDirs()
 #print(folder)
 #print(mapping.getFolderFiles(folder[-1],"html"))
+markdown.inhaltsangabeTopButtons()
+for path in mapping.getMDFiles():
+    conv.MDtoHTML(path)
 
-#for path in mapping.getMDFiles():
-#   conv.MDtoHTML(path)
-
-#indexer.compose()
-
-
-dirs =  markdown.getDirs()
-files = markdown.getMDFiles()
-# print(files[0])
-# pprint(markdown.readFile(files[0]))
-
-link = "tEASDADSFestwort hallo welt"
-
-
-#print(markdown.replaceHash("# Hallo Welt oder nicht tesat \n"))
-print()
-#pprint(markdown.inhaltsangabeTopButtons("./testfile.md"))
-pprint(markdown.inhaltsangabeTopButtons("./testfile.md"))
+indexer.compose()

@@ -59,10 +59,10 @@ class MarkdownFinisher(Mapper):
         
             readFile = self.readFile(file)
             topbuttonIndex = []
+            if self.backbutton in readFile:
+                continue
             inhaltsangabe = [self.backbutton ,"# Inhaltsangabe\n"]
             
-            print(len(readFile))
-
             for i in range(1,len(readFile)):
                 line = readFile[i]
                 
@@ -75,7 +75,6 @@ class MarkdownFinisher(Mapper):
                     cleaned = self.replaceHash(line)
                     headerhigh = self.__listHighLevel(cleaned)
                     topbuttonIndex.append(i)
-                    print(line)
                     inhaltsangabe.append(headerhigh)
             inserted = 0
             for ind in topbuttonIndex:
@@ -85,7 +84,7 @@ class MarkdownFinisher(Mapper):
             retList = inhaltsangabe + readFile
             with open (file, "w") as f:
                 f.writelines(retList)
-        return(retList)
+        
 
 class HTMLFinisher(Mapper):
     def __init__(self, templatePath: str, nameHeaderfile : str, nameFooterfile:str) -> None:

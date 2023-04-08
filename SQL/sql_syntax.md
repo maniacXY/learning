@@ -1,9 +1,7 @@
-# [go back](../index.html)
-
-# Inhaltsverzeichnis
-- [DDL - Data Definition Language](#ddl)
-- [DML - Data Manipulation Language](#dml)
-- [Join's Schaubild](#joins)
+# [BACK](../index.html)
+# Inhaltsangabe
+- [DML](#dml)
+- [Joins](#joins)
 
 # DDL
 *Data Definition Language*
@@ -16,6 +14,7 @@ DDL umfasst die Befehle zum Anlegen, Ändern und Löschen von Datenbanken, Tabel
 
 ![TB-Anlegen-Löschen](pics/01-1_DDL_anlegen-loeschenTB.png)
 
+[TOP](#)
 # DML
 *Data Manipulation Language*
 
@@ -33,5 +32,6 @@ DDL umfasst die Befehle zum Anlegen, Ändern und Löschen von Datenbanken, Tabel
 
 ![GroupBy-Having](pics/05_DML_groupby-having.png)
 
+[TOP](#)
 # Joins
 ![JoinsErklraerung](pics/joins.png)

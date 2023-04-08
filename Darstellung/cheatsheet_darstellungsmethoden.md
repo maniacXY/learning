@@ -1,24 +1,23 @@
-# [Zur Übersicht](./index.html)
-# Datenbanken ERM
-*Entity-Relationship-Modell*
-
-Das ERM ist ein Modell(zur Darstellung) von Dingen, Gegenständen, Objekten (= 'entities') und der Beziehung/Zusammenhängen zwischen diesen (= 'relationship'). Es dient dazu, im Rahmen der semantischen (abstrakt, formale Beschreibung / Darstellung eines Ausschnittes) Datenmodellierung vereinfacht darzustellen.
-
+# [BACK](../index.html)
 # Inhaltsangabe
-- [SQL-Datenbankendartellung](#sql-datenbankendarstellung)
+- [SQL-Datenbankdarstellung](#sql-datenbankdarstellung)
 	- [ER-Chen](#er-chen)
 	- [Physisches Modell](#physisches-modell)
 - [Anwendungsentwicklung](#anwendungsentwicklung)
 	- [Struktogramm](#struktogramm)
-	- [PAP](#pap)	
+	- [PAP](#pap)
 - [UML](#uml)
 	- [Klassendiagramm](#klassendiagramm)
 	- [Anwendungsfalldiagramm](#anwendungsfalldiagramm)
 - [EPK](#epk)
 - [Entscheidungstabelle](#entscheidungstabelle)
 
-	
+# Datenbanken ERM
+*Entity-Relationship-Modell*
 
+Das ERM ist ein Modell(zur Darstellung) von Dingen, Gegenständen, Objekten (= 'entities') und der Beziehung/Zusammenhängen zwischen diesen (= 'relationship'). Es dient dazu, im Rahmen der semantischen (abstrakt, formale Beschreibung / Darstellung eines Ausschnittes) Datenmodellierung vereinfacht darzustellen.
+
+[TOP](#)
 # SQL-Datenbankdarstellung
 Darstellung in vielen SQL-Datenbankensystemen um die Beziehungen zwischen den bestehenden Tables darzustellen
 Darstellung wie Datenbank tatsächlich modelliert wird mit PK,FK, ggf auch Datentypen
@@ -35,10 +34,10 @@ ER Chen Beisspiel 1
 ER Chen Beisspiel 2
 !["ER-ModellnachChen_beisspiel_2"](pics/erm_chen_beisspiel_2.png)
 
-
 ## Physisches Modell
 ![pyhsisches Modell](pics/erm_physischeER.png)
 
+[TOP](#)
 # Anwendungsentwicklung
 ## Struktogramm
 *Nassi-Schneidermann-Diagramm*
@@ -60,6 +59,7 @@ PAP-Elemente
 PAP-Beisspiel
 ![PAP Beisspiel](pics/pap_beisspiel.png)
 
+[TOP](#)
 # UML
 *unified modeling language*
 
@@ -72,7 +72,6 @@ UML Klassendiagramm-beisspiel-1
 
 UML Klassendiagramm-beisspiel-1
 ![UML Klassendiagramm-beisspiel-2](pics/UML_Klassendiagramm_beisspiel_2.png)
-
 
 ## Anwendungsfalldiagramm
 UML Anwendungsdiagramm-elemente-1
@@ -87,8 +86,7 @@ UML Anwendungsdiagramm-elemente-3
 UML Anwendungsdiagramm-beisspiel
 ![UML Anwendungsfalldiagramm-beisspiel](pics/UML_Anwendungsfalldiagramm_beisspiel.png)
 
-
-
+[TOP](#)
 # EPK
 *ereignisgesteuerte  Prozesskette*
 
@@ -100,6 +98,7 @@ EPK-Elemente
 EPK_Beisspiel
 ![EPK-Beisspiel](pics/epk_bsp.png)
 
+[TOP](#)
 # Entscheidungstabelle
 Alle Möglichkeiten werden mittels Bedingung -> Aktion erfasst. Bei 3 Aktionen gibt es 2^3 Möglichkeiten
 

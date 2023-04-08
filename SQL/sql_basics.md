@@ -1,9 +1,5 @@
-# [back](../index.html)
-
+# [BACK](../index.html)
 # Inhaltsangabe
-- [back](#back)
-- [Inhaltsangabe](#inhaltsangabe)
-- [Anomalien](#anomalien)
 - [Kreuztabelle](#kreuztabelle)
 - [Vergleich Excel-Datenbank](#vergleich-excel-datenbank)
 - [Notes](#notes)
@@ -13,11 +9,13 @@
 - Einfügeanomalie: führt zu Inkonsistenz bei nicht vollständiger Dateneingabe oder wenn ein Wert vergessen wird, wird gar nichts eingefügt
 - Aktualisierungs-/Änderungsanomalie: Inkonsistenz der Daten wenn nicht atomar und an meheren Stellen verfügbar, somit ist nicht klar welcher Wert korrekt ist
 
+[TOP](#)
 # Kreuztabelle
 Bei einer n:m-Beziehung wird eine Zwischentabelle erzeugt. 
 
 Der Primary Key von der 1er Tabelle wird zum Foreign key der N Tabelle
 
+[TOP](#)
 # Vergleich Excel-Datenbank
 
 |Excel			|		Datenbank|
@@ -30,6 +28,7 @@ Der Primary Key von der 1er Tabelle wird zum Foreign key der N Tabelle
 |redundanz spielt keine Rolle		| 	redundanzen werden vermieden 
 |					| 	Datenbanken hat eigenes
 
+[TOP](#)
 # Notes
 referenzielle Integrität: Ein FK-Wert kann nur eingetragen werden, wenn die zugehörige PK-Wert existiert
 
