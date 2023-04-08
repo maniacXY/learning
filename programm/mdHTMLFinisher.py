@@ -1,4 +1,5 @@
 from programm.Mapping import Mapper
+from pprint import pprint
 
 # md struktur
 # ['#[BACK](../index.html)\n',
@@ -88,7 +89,7 @@ class MarkdownFinisher(Mapper):
         
 
 class HTMLFinisher(Mapper):
-    def __init__(self, templatePath: str, nameHeaderfile : str, nameFooterfile:str) -> None:
+    def __init__(self, templatePath: str, nameHeaderfile : str, nameFooterfile:str, placeHolder:str) -> None:
         """example Path = ./testdir/ Filename = myfile.txt"""
         super().__init__()
         self.__templatePath = templatePath
@@ -96,12 +97,24 @@ class HTMLFinisher(Mapper):
         self.__nameFooter = nameFooterfile
         self.__header = []
         self.__footer = []
+        self.readHeaderFooter(placeHolder)
 
-    def readHeaderFooter(self) -> None:
-        with open(self.templatePath+ self.nameHeader, "r") as f:
+    def readHeaderFooter(self, placeHolder:str) -> None:
+        self.__header = self.replaceStyleCSS(self.__templatePath+self.__nameHeader, placeHolder)
+        with open(self.__templatePath+ self.__nameFooter, "r") as f:
             tmplist = f.readlines()
-        self.header = tmplist
-        with open(self.templatePath+ self.nameFooter, "r") as f:
-            tmplist = f.readlines()
-        self.footer = tmplist
+        self.__footer = tmplist
+        
+        
+
+    def headerFooterCompose(self):
+        files = self.getHTMLFiles()
+        for file in files:
+            with open (file, "r") as f:
+                tmpfile = f.readlines()
+            tmpfile = self.__header + tmpfile + self.__footer
+            pprint(tmpfile)
+            with open (file, "w") as f:
+                f.writelines(tmpfile)
+                
     

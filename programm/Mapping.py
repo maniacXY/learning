@@ -2,6 +2,8 @@ import os
 from glob import glob
 from pprint import pprint
 
+from programm.Converter import Converter
+
 class ReadDirs:
     def __init__(self) -> None:
         pass
@@ -15,7 +17,7 @@ class ReadDirs:
         files = os.listdir(f"{folder}")
         return files
 
-class Mapper:
+class Mapper(Converter):
     def __init__(self) -> None:
         #folder = { folderName: { 
         #               htmlFiles:[]
@@ -79,7 +81,7 @@ class Mapper:
         keys = self.__folders
         htmlList= []
         for key in keys:
-            if key is not "questionFiles":
+            if key != "questionFiles":
                 tmplist = self.__mappping[key]["htmlFiles"]    
                 for file in tmplist:
                     htmlList.append(key+file)
@@ -110,3 +112,12 @@ class Mapper:
         with open (filePath, "r") as f: 
             fileList = f.readlines()
         return fileList
+
+    def replaceStyleCSS(self, headerPath:str, placeHolder:str):
+        with open (headerPath, "r") as f:
+            file = f.readlines()
+        for i in range(len(file)):
+            if placeHolder in file[i]:
+                file[i] = file[i].replace(placeHolder, "./style.css")
+        
+        return file

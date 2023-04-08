@@ -3,7 +3,7 @@ import os
 class Converter:
 
     def __init__(self) -> None:
-        pass
+        super().__init__()
 
 
     def MDtoHTML(self, filePath):

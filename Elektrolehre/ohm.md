@@ -43,6 +43,10 @@ Iges = I1 + I2 + In
 
 [TOP](#)
 
+[TOP](#)
+
+[TOP](#)
+
 # Widerstand
 der Widerstand ist kontant
 
@@ -50,6 +54,10 @@ der Widerstand ist kontant
 P -> W(att)
 
 W = U * I 
+
+[TOP](#)
+
+[TOP](#)
 
 [TOP](#)
 

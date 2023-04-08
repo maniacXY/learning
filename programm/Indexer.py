@@ -1,40 +1,43 @@
 from programm.Mapping import Mapper
+from pprint import pprint
 
-class Indexer:
-    def __init__(self) -> None:
-        self.htmlstring =""
-        self.mapper = Mapper()
-
+class Indexer(Mapper):
+    def __init__(self, pathToHeader, placeHolder) -> None:
+        super().__init__()
+        self.htmlstringList = self.replaceStyleCSS(pathToHeader, placeHolder)
+        self.placeholder = "<PLACEHOLDER>"
+        self.__compose()
+        
     def __str__(self) -> str:
         return "index.html wird erstellt"
-    def compose(self):
+    
+    def __compose(self):
         # setting file up
-        self.htmlstring = self.ueberschrift()
-        for dir in self.mapper.getDirs():
+        self.htmlstringList.append(self.__ueberschrift())
+        for dir in self.getDirs():
             filelist = []
-            for file in self.mapper.getFolderFiles(dir, "html"):
+            for file in self.getFolderFiles(dir, "html"):
                 filelist.append(file)
-            self.htmlstring += self.chapter(dir, filelist)
-        self.writeFile()
+            self.__chapter(dir, filelist)
+        self.htmlstringList.append("</body></html>")
+        self.__writeFile()
         
-    def ueberschrift(self):
+    def __ueberschrift(self):
         return '<h1 id="alle-seiten">Alle Seiten</h1>'
 
-    def chapter(self, Überschrift:str, Files:list):
-        retString = ""
-        retString += f'<h2 id="{Überschrift.lower()}">{Überschrift}</h2><ul>'
+    def __chapter(self, Überschrift:str, Files:list):
+        
+        self.htmlstringList.append(f'<h2 id="{Überschrift.lower()}">{Überschrift}</h2><ul>')
         for file in Files:
-            retString+=f'<li><a href="{Überschrift}{file}">{file}</a></li>'
-        retString += '</ul>'
-        return retString
-    def writeFile(self):
+            self.htmlstringList.append(f'<li><a href="{Überschrift}{file}">{file}</a></li>')
+        self.htmlstringList.append('</ul>')
+        
+    def __writeFile(self):
+        
         with open("index.html", "w") as file:
-            file.write(self.htmlstring)
+            file.writelines(self.htmlstringList)
 
-if __name__ == "__main__":
-    indexer = Indexer()
-    indexer.compose()
-    print("\nIndexfile wurde geschrieben\n")
+
 
 
 
