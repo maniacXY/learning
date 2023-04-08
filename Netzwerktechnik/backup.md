@@ -1,12 +1,14 @@
 # [BACK](../index.html)
 # Inhaltsangabe
+- [BACK](#back)
+- [Inhaltsangabe](#inhaltsangabe)
 - [Definition](#definition)
 - [Methoden](#methoden)
-	- [3-2-1 Regel](#3-2-1-regel)
+  - [3-2-1 Regel](#3-2-1-regel)
 - [Backup Strategien](#backup-strategien)
-	- [Fifo](#fifo)
-	- [Generationenprinzip](#generationenprinzip)
-	- [Tuerme von Hanoi](#tuerme-von-hanoi)
+  - [Fifo](#fifo)
+  - [Generationenprinzip](#generationenprinzip)
+  - [Tuerme von Hanoi](#tuerme-von-hanoi)
 
 # Definition
 Datensicherung bezeichnet Kopieren von Daten um sie ggf wiederherstellen zu können. Elementare Maßnahme zur Datensicherheit
@@ -19,13 +21,9 @@ Inkrementell: Änderungen seit dem letzten Backup (inkrementell, diff, voll); ga
 
 [TOP](#)
 
-[TOP](#)
-
 # Methoden
 ## 3-2-1 Regel
 3 Backupkopien, 2 versch Datenträger (Platte, CD), 1 Kopie an einem separaten Ort (im falle elementarer Schäden)
-
-[TOP](#)
 
 [TOP](#)
 

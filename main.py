@@ -6,13 +6,13 @@ from programm.mdHTMLFinisher import *
 
 from pprint import pprint
 
-# mapping = Mapper()
+mapping = Mapper()
 indexer = Indexer("./programm/templateHeader.txt", "<PLACEHOLDER>")
-# markdown = MarkdownFinisher()
+markdown = MarkdownFinisher()
 
-# markdown.inhaltsangabeTopButtons()
-# for path in mapping.getMDFiles():
-#     mapping.MDtoHTML(path)
+markdown.inhaltsangabeTopButtons()
+for path in markdown.getMDFiles():
+    markdown.MDtoHTML(path)
 
 # indexer.compose()
 

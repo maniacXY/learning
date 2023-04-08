@@ -1,24 +1,7 @@
-# [BACK](../index.html)
-# Inhaltsangabe
-- [Datenbanken ERM](#datenbanken-erm)
-- [SQL-Datenbankdarstellung](#sql-datenbankdarstellung)
-	- [ER-Chen](#er-chen)
-	- [Physisches Modell](#physisches-modell)
-- [Anwendungsentwicklung](#anwendungsentwicklung)
-	- [Struktogramm](#struktogramm)
-	- [PAP](#pap)
-- [UML](#uml)
-	- [Klassendiagramm](#klassendiagramm)
-	- [Anwendungsfalldiagramm](#anwendungsfalldiagramm)
-- [EPK](#epk)
-- [Entscheidungstabelle](#entscheidungstabelle)
-
 # Datenbanken ERM
 *Entity-Relationship-Modell*
 
 Das ERM ist ein Modell(zur Darstellung) von Dingen, Gegenständen, Objekten (= 'entities') und der Beziehung/Zusammenhängen zwischen diesen (= 'relationship'). Es dient dazu, im Rahmen der semantischen (abstrakt, formale Beschreibung / Darstellung eines Ausschnittes) Datenmodellierung vereinfacht darzustellen.
-
-[TOP](#)
 
 [TOP](#)
 
@@ -43,8 +26,6 @@ ER Chen Beisspiel 2
 
 [TOP](#)
 
-[TOP](#)
-
 # Anwendungsentwicklung
 ## Struktogramm
 *Nassi-Schneidermann-Diagramm*
@@ -65,8 +46,6 @@ PAP-Elemente
 
 PAP-Beisspiel
 ![PAP Beisspiel](pics/pap_beisspiel.png)
-
-[TOP](#)
 
 [TOP](#)
 
@@ -98,8 +77,6 @@ UML Anwendungsdiagramm-beisspiel
 
 [TOP](#)
 
-[TOP](#)
-
 # EPK
 *ereignisgesteuerte  Prozesskette*
 
@@ -110,8 +87,6 @@ EPK-Elemente
 
 EPK_Beisspiel
 ![EPK-Beisspiel](pics/epk_bsp.png)
-
-[TOP](#)
 
 [TOP](#)
 

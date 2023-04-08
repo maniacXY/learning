@@ -30,6 +30,7 @@ class MarkdownFinisher(Mapper):
         super().__init__()
         self.backbutton = "# [BACK](../index.html)\n"
         self.topbutton = "[TOP](#)\n\n"
+        self.topbutton2 = "[TOP](#)\n"
         self.topbuttons = False
 
     def __linkConverter(self, linkToConvert:str) -> str:
@@ -62,30 +63,46 @@ class MarkdownFinisher(Mapper):
             topbuttonIndex = []
             if self.backbutton in readFile:
                 continue
-            inhaltsangabe = [self.backbutton ,"# Inhaltsangabe\n"]
-            
-            for i in range(len(readFile)):
-                line = readFile[i]
+            else:
+                counter = 0
+                for line in readFile:
+                    if self.topbutton in line or self.topbutton2 in line:
+                        readFile.remove(line)
+                        readFile.remove(counter-1)
+                    counter += 1
+                        
+                inhaltsangabe = [self.backbutton ,"# Inhaltsangabe\n"]
                 
-                if "##" in line[:4]:
-                    cleaned = self.replaceHash(line)
-                    headerlow = self.__listLowerLevel(cleaned)
-                    inhaltsangabe.append(headerlow )
+                for i in range(len(readFile)):
+                    line = readFile[i]
+                                        
+                    if "##" in line[:4]:
+                        cleaned = self.replaceHash(line)
+                        headerlow = self.__listLowerLevel(cleaned)
+                        inhaltsangabe.append(headerlow )
+                        
+                    elif "#" in line[:4]:
+                        cleaned = self.replaceHash(line)
+                        headerhigh = self.__listHighLevel(cleaned)
+                        topbuttonIndex.append(i)
+                        inhaltsangabe.append(headerhigh)
                     
-                elif "#" in line[:4]:
-                    cleaned = self.replaceHash(line)
-                    headerhigh = self.__listHighLevel(cleaned)
-                    topbuttonIndex.append(i)
-                    inhaltsangabe.append(headerhigh)
-            inserted = 0
-            topbuttonIndex.pop(0)
-            for ind in topbuttonIndex:
-                readFile.insert(ind + inserted, self.topbutton)   
-                inserted += 1  
-            inhaltsangabe.append("\n")
-            retList = inhaltsangabe + readFile
-            with open (file, "w") as f:
-                f.writelines(retList)
+                inserted = 0
+                topbuttonIndex.pop(0)
+                for ind in topbuttonIndex:
+                    readFile.insert(ind + inserted, self.topbutton)   
+                    inserted += 1  
+                inhaltsangabe.append("\n")
+                retList = inhaltsangabe + readFile
+                pprint(retList)
+              
+                
+                        
+                
+
+
+                with open (file, "w") as f:
+                    f.writelines(retList)
         
 
 class HTMLFinisher(Mapper):
@@ -113,7 +130,6 @@ class HTMLFinisher(Mapper):
             with open (file, "r") as f:
                 tmpfile = f.readlines()
             tmpfile = self.__header + tmpfile + self.__footer
-            pprint(tmpfile)
             with open (file, "w") as f:
                 f.writelines(tmpfile)
                 

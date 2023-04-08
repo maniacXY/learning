@@ -1,11 +1,13 @@
 # [BACK](../index.html)
 # Inhaltsangabe
+- [BACK](#back)
+- [Inhaltsangabe](#inhaltsangabe)
 - [Cloud vs On-Premise](#cloud-vs-on-premise)
 - [Cloudempfehlung](#cloudempfehlung)
 - [Cloud-Modelle](#cloud-modelle)
-	- [IaaS:Infrasturkture as a Service](#iaas:infrasturkture-as-a-service)
-	- [PaaS:Platform as a Service](#paas:platform-as-a-service)
-	- [SaaS:Software as a Service](#saas:software-as-a-service)
+	- [IaaS:Infrasturkture as a Service](#iaasinfrasturkture-as-a-service)
+	- [PaaS:Platform as a Service](#paasplatform-as-a-service)
+	- [SaaS:Software as a Service](#saassoftware-as-a-service)
 - [Cloud Konzepte](#cloud-konzepte)
 - [Charakteristik von Clouds](#charakteristik-von-clouds)
 - [Vergleich der Services](#vergleich-der-services)
@@ -32,8 +34,6 @@
 
 [TOP](#)
 
-[TOP](#)
-
 # Cloudempfehlung
 Eine stabile und schnell Internetverbindung, Client Software um entsprechend eBackup-Strategien zu realisieren. Eine Userauthenzifizierung zum Schutz vor unbefugten Dritten, eine Verschlüsselung bereits schon auf dem zu sichernden System. Backupprozesse definieren
 
@@ -44,8 +44,6 @@ Eine stabile und schnell Internetverbindung, Client Software um entsprechend eBa
 - in der Regel günstiger
 - service-on-demand: höhere Verfügbarkeit
 - flexible Strukturen
-
-[TOP](#)
 
 [TOP](#)
 
@@ -61,8 +59,6 @@ Software on Demand, Onlinespiele, Office-Anwendung, 365. Software wird gestellt 
 
 [TOP](#)
 
-[TOP](#)
-
 # Cloud Konzepte
 - Zentralisierung: Daten an einem Ort, von überall erreichbar
 - Virtualisierung: virtuelle Maschinen, mehrere Anwendungen auf einem Server
@@ -71,12 +67,8 @@ Software on Demand, Onlinespiele, Office-Anwendung, 365. Software wird gestellt 
 
 [TOP](#)
 
-[TOP](#)
-
 # Charakteristik von Clouds
 ![Charakteristik Clouds](pics/01_charakteristik_clouds.png)
-
-[TOP](#)
 
 [TOP](#)
 
@@ -85,19 +77,13 @@ Software on Demand, Onlinespiele, Office-Anwendung, 365. Software wird gestellt 
 
 [TOP](#)
 
-[TOP](#)
-
 # Servicetypen
 ![Servicetype](pics/03_service-typen.png)
 
 [TOP](#)
 
-[TOP](#)
-
 # Cloudbesitzer
 ![Cloudbesitzer](pics/04_cloudbesitzer.png)
-
-[TOP](#)
 
 [TOP](#)
 
