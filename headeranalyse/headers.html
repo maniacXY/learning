@@ -1,0 +1,1056 @@
+<!DOCTYPE html><html>
+<head>
+<title></title>
+<style type="text/css">
+<!--
+.xflip {
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: fliph;
+}
+.yflip {
+    -moz-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: flipv;
+}
+.xyflip {
+    -moz-transform: scaleX(-1) scaleY(-1);
+    -webkit-transform: scaleX(-1) scaleY(-1);
+    -o-transform: scaleX(-1) scaleY(-1);
+    transform: scaleX(-1) scaleY(-1);
+    filter: fliph + flipv;
+}
+-->
+</style>
+</head>
+<body>
+<a name=1></a><img src="headeranalyse/header-1_1.png"/><br/>
+<img src="headeranalyse/header-1_2.png"/><br/>
+Headeranalyse<br/>
+Netzwerktraffic-Analyse&#160;mit&#160;Wireshark<br/>
+1<br/>
+<hr/>
+<a name=2></a><img src="headeranalyse/header-2_1.png"/><br/>
+<img src="headeranalyse/header-2_2.png"/><br/>
+<b>Agenda</b><br/>
+•<br/>
+Grundlagen&#160;der&#160;Header-Analyse<br/>
+–<br/>
+Warum&#160;ein&#160;Model<br/>
+–<br/>
+OSI-Modell<br/>
+–<br/>
+Aufbau&#160;von&#160;Headern<br/>
+•&#160;Encapsulation<br/>•&#160;Aufbau&#160;von&#160;Headern<br/>
+–<br/>
+Headeranalyse<br/>
+•&#160;IPv4&#160;/&#160;v6<br/>•&#160;TCP&#160;/&#160;UTP<br/>•&#160;ARP&#160;/&#160;RARP<br/>•&#160;NAT<br/>•&#160;DNS<br/>•&#160;DHCP<br/>•&#160;VPN&#160;–&#160;PPTP<br/>
+–<br/>
+Wireshark<br/>
+•&#160;Installation&#160;von&#160;Wireshark<br/>•&#160;Grundlegende&#160;Bedienelemente<br/>•&#160;Positionierung&#160;des&#160;Sniffer&#160;im&#160;Netzwerk<br/>
+2<br/>
+<hr/>
+<a name=3></a><img src="headeranalyse/header-3_1.png"/><br/>
+<img src="headeranalyse/header-3_2.png"/><br/>
+<b>Protokolle&#160;als&#160;Grundlage für&#160;die&#160;Traffic-Analyse</b><br/>
+•<br/>
+Die&#160;Verbindung&#160;zwischen&#160;zwei&#160;Rechnern&#160;ist&#160;nicht&#160;so&#160;einfach,&#160;wie&#160;es&#160;erscheint.<br/>
+•<br/>
+Denn&#160;ein&#160;Netzwerk&#160;benötigt&#160;nicht&#160;nur&#160;eine&#160;Architektur,&#160;die&#160;regelt,&#160;wie&#160;die&#160;einzelnen&#160;Geräte&#160;<br/>zusammenhängen,&#160;sondern&#160;auch&#160;Standards&#160;zur&#160;Steuerung&#160;der&#160;Kommunikation&#160;zwischen&#160;<br/>unterschiedlichen&#160;Systemen.&#160;Diese&#160;nennt&#160;man&#160;Protokolle.<br/>
+•<br/>
+Protokolle:&#160;Standardisierte&#160;„Verhaltensweisen“&#160;im&#160;Umgang&#160;miteinander&#160;<br/>
+•<br/>
+In&#160;der&#160;IT&#160;dienen&#160;Protokolle&#160;für&#160;die&#160;standardisierte&#160;Vermittlung&#160;von&#160;Daten<br/>
+•<br/>
+Hierbei&#160;gibt&#160;es&#160;eine&#160;Vielzahl&#160;von&#160;Protokollen&#160;(s.&#160;Karte&#160;der&#160;Netzwerkprotokolle),&#160;die&#160;miteinander&#160;<br/>interagieren,&#160;um&#160;Daten&#160;zu&#160;vermitteln.<br/>
+3<br/>
+<hr/>
+<a name=4></a><img src="headeranalyse/header-4_1.png"/><br/>
+<img src="headeranalyse/header-4_2.png"/><br/>
+<b>Bsp.&#160;Telefongespräch:</b><br/>
+–&#160;Teilnehmer&#160;A&#160;muss&#160;auf&#160;der&#160;physikalischen&#160;Sicht&#160;das&#160;Medium&#160;nutzen,&#160;das&#160;auch&#160;seinem&#160;Gesprächspartner&#160;B&#160;zur&#160;<br/>
+Verfügung&#160;steht.<br/>
+–&#160;Er&#160;muss&#160;die&#160;richtige&#160;Verbindung&#160;wählen,&#160;dazu&#160;muss&#160;der&#160;Anschuss&#160;von&#160;B&#160;richtig&#160;angeschlossen&#160;sein.<br/>
+–&#160;Ist&#160;B&#160;in&#160;einem&#160;Firmennetz,&#160;muss&#160;dieses&#160;Netzwerk&#160;richtig&#160;eingestellt&#160;sein,&#160;damit&#160;der&#160;Anruf&#160;von&#160;A&#160;durchgestellt&#160;<br/>
+werden&#160;kann.<br/>
+–&#160;A&#160;und&#160;B&#160;müssen&#160;dieselbe&#160;Sprache&#160;sprechen,&#160;damit&#160;die&#160;Informationen&#160;zwischen&#160;ihnen&#160;transportiert&#160;werden&#160;<br/>
+können.<br/>
+–&#160;Erst&#160;wenn&#160;A&#160;gewählt&#160;hat&#160;und&#160;mit&#160;B&#160;verbunden&#160;ist,&#160;kann&#160;er&#160;B&#160;nach&#160;den&#160;Informationen&#160;fragen,&#160;die&#160;er&#160;braucht.&#160;<br/>
+Dazu&#160;muss&#160;er&#160;sich&#160;für&#160;die&#160;Sitzung&#160;identifizieren.<br/>
+–&#160;Da&#160;A&#160;die&#160;Infos&#160;nicht&#160;selbst&#160;lesen&#160;kann,&#160;muss&#160;B&#160;sie&#160;laut&#160;und&#160;strukturiert&#160;vorlesen.&#160;Also&#160;muss&#160;B&#160;einen&#160;Text&#160;in&#160;<br/>
+Sprache&#160;umsetzen,&#160;damit&#160;A&#160;die&#160;Informationen&#160;bekommt.<br/>
+–&#160;Schlussendlich&#160;muss&#160;A&#160;B&#160;mitteilen&#160;können,&#160;wo&#160;die&#160;Informationen&#160;sind,&#160;die&#160;er&#160;möchte,&#160;also&#160;auf&#160;welchen&#160;Ordner&#160;<br/>
+er&#160;&#160;Zugriff&#160;haben&#160;möchte.<br/>
+4<br/>
+<hr/>
+<a name=5></a><img src="headeranalyse/header-5_1.png"/><br/>
+<img src="headeranalyse/header-5_2.png"/><br/>
+<b>Grundlagen&#160;der&#160;Traffic-Analyse</b><br/>
+Daher&#160;muss&#160;für&#160;die&#160;Verbindung&#160;zwischen&#160;Computern&#160;ein&#160;Modell&#160;entwickelt&#160;<br/>werden,&#160;mit&#160;dessen&#160;Hilfe&#160;sich&#160;die&#160;Verbindung&#160;zwischen&#160;zwei&#160;oder&#160;mehr&#160;<br/>Parteien&#160;erklären&#160;lässt.<br/>
+Dabei&#160;sollte&#160;dieses&#160;Modell&#160;aus&#160;mehreren&#160;miteinander&#160;zusammenhängenden&#160;<br/>Schichten&#160;bestehen,&#160;die&#160;eine&#160;Information&#160;durchläuft,&#160;damit&#160;sie&#160;von&#160;einem&#160;<br/>Teilnehmer&#160;zum&#160;andern&#160;kommt.<br/>
+Durch&#160;eine&#160;solche&#160;Modellannahme&#160;wird&#160;die&#160;tatsächliche&#160;Komplexität&#160;reduziert&#160;<br/>und&#160;es&#160;wird&#160;einfacher,&#160;den&#160;Ablauf&#160;der&#160;Kommunikation&#160;zu&#160;beschreiben.&#160;<br/>
+5<br/>
+<hr/>
+<a name=6></a><img src="headeranalyse/header-6_1.png"/><br/>
+<img src="headeranalyse/header-6_2.png"/><br/>
+<b>Warum&#160;ein&#160;Modell?</b><br/>
+Mit&#160;Hilfe&#160;solcher&#160;Modelle&#160;ist&#160;es&#160;möglich,&#160;<br/>
+–&#160;gezielt&#160;Protokolle&#160;für&#160;eine&#160;einzelne,&#160;klar&#160;definierte&#160;Aufgabe&#160;zu&#160;entwickeln,<br/>
+–&#160;diese&#160;so&#160;zu&#160;entwickeln,&#160;dass&#160;eine&#160;Wechselwirkung&#160;auf&#160;Protokolle&#160;in&#160;<br/>
+anderen&#160;Schichten&#160;unterbleibt,<br/>
+–&#160;die&#160;Komplexität&#160;der&#160;tatsächlichen&#160;Handlung&#160;verringert&#160;und<br/>
+–&#160;eine&#160;größtmögliche&#160;Flexibilität&#160;für&#160;die&#160;Implementation&#160;neuer&#160;Protokolle&#160;zu&#160;<br/>
+bieten.<br/>
+6<br/>
+<hr/>
+<a name=7></a><img src="headeranalyse/header-7_1.png"/><br/>
+<img src="headeranalyse/header-7_2.png"/><br/>
+<b>Das&#160;OSI&#160;7-Modell</b><br/>
+Das&#160;OSI&#160;7-Modell&#160;besteht&#160;aus&#160;sieben&#160;Schichten:<br/>
+<b>OSI-Modell&#160;(deutsch)</b><br/>
+<b>OSI-Modell&#160;(engl.)</b><br/>
+<b>Beispiel&#160;/&#160;Protokoll</b><br/>
+Schicht&#160;7<br/>
+Anwendungsschicht&#160;Application&#160;Layer<br/>
+Informations-<br/>
+auswahl /&#160;HTTP<br/>
+Schicht&#160;6<br/>
+Darstellungsschicht<br/>
+Presentation&#160;Layer&#160;Lesen/Sprechen&#160;/&#160;<br/>
+HTML<br/>
+Schicht&#160;5<br/>
+Sitzungsschicht<br/>
+Session&#160;Layer<br/>
+Identifizierung&#160;/&#160;<br/>
+NAT<br/>
+Schicht&#160;4<br/>
+Transportschicht<br/>
+Transport&#160;Layer<br/>
+Verständnis-<br/>
+kontrolle&#160;/&#160;TCP<br/>
+Schicht&#160;3<br/>
+Vermittlungsschicht&#160;Network&#160;Layer<br/>
+Interne&#160;Durchwahl&#160;<br/>
+/&#160;IP<br/>
+Schicht&#160;2<br/>
+Datensicherungs-<br/>
+Data&#160;Link&#160;Layer<br/>
+Anschlussnummer&#160;<br/>
+schicht<br/>
+/&#160;MAC<br/>
+Schicht&#160;1<br/>
+Physikalische&#160;<br/>
+Physical&#160;Layer<br/>
+Auswahl&#160;des&#160;<br/>
+Schicht<br/>
+Medium&#160;/&#160;568&#160;b<br/>
+7<br/>
+<hr/>
+<a name=8></a><img src="headeranalyse/header-8_1.png"/><br/>
+<img src="headeranalyse/header-8_2.png"/><br/>
+<img src="headeranalyse/header-8_3.png"/><br/>
+Das&#160;OSI 7&#160;Modell<br/>
+Über&#160;sog.&#160;<b>Service&#160;Access&#160;Points&#160;(SAP)</b>,&#160;eine&#160;<br/>
+<b>standardisierte&#160;Schnittstelle&#160;</b>zwischen&#160;jeder&#160;<br/>
+Schicht,&#160;stellt&#160;die&#160;einzelne&#160;Schicht&#160;N&#160;ihrer&#160;<br/>
+nächsthöheren&#160;N+1&#160;die&#160;vorhandenen&#160;Dienste&#160;<br/>
+zur&#160;Verfügung.<br/>
+Bei&#160;der&#160;Kommunikation&#160;zwischen&#160;einzelnen&#160;<br/>
+PCs&#160;verhält&#160;sich&#160;Schicht&#160;N&#160;so,&#160;als&#160;ob&#160;sie&#160;direkt&#160;<br/>
+mit derselben&#160;Schicht&#160;auf&#160;dem&#160;<br/>
+Partnerrechner&#160;kommunizieren&#160;würde,&#160;<br/>
+faktisch&#160;durchläuft&#160;ein&#160;Datenpaket&#160;immer&#160;alle&#160;<br/>
+Schichten&#160;unterhalb&#160;von&#160;N.<br/>
+Nur&#160;die&#160;<b>direkt&#160;aneinander&#160;angrenzenden&#160;</b><br/>
+<b>Schichten&#160;kommunizieren&#160;miteinander</b>,&#160;es&#160;<br/>
+können&#160;keine&#160;Schichten&#160;übersprungen&#160;<br/>
+werden.&#160;<br/>
+8<br/>
+<hr/>
+<a name=9></a><img src="headeranalyse/header-9_1.png"/><br/>
+<img src="headeranalyse/header-9_2.png"/><br/>
+<b>Das&#160;OSI&#160;7&#160;Modell</b><br/>
+Die&#160;zwischen&#160;den&#160;einzelnen&#160;Schichten&#160;weitergeleiteten&#160;Daten&#160;werden&#160;als&#160;<b>Protokolldateneinheiten&#160;</b>(<b>PDU<br/></b>für&#160;Protocol&#160;Data&#160;Unit)&#160;bezeichnet,&#160;die&#160;sich&#160;wie&#160;folgt&#160;zusammensetzen:<br/>
+<b>Header</b><br/>
+<b>Daten&#160;(Payload)</b><br/>
+<b>Trailer</b><br/>
+Besitzt&#160;die&#160;<br/>
+Sind&#160;die&#160;<br/>
+Enthält&#160;<br/>
+<b>Protokoll-</b><br/>
+einzelnen<br/>
+<b>Prüfsummen</b>,&#160;um&#160;<br/>
+<b>Kontroll-</b><br/>
+Nutzdaten&#160;<br/>
+die&#160;Stabilität&#160;der&#160;<br/>
+<b>Informationen</b><br/>
+(<b>Payload&#160;</b>oder&#160;<br/>
+Daten&#160;(<b>Kohärenz</b>)&#160;<br/>
+des&#160;jeweiligen&#160;<br/>
+SDU&#160;Server&#160;Data&#160;&#160;zu&#160;überprüfen.<br/>
+Dienstes&#160;der&#160;<br/>
+Unit).<br/>
+Schicht.<br/>
+Dabei&#160;dienen&#160;hochstandardisierte&#160;Schnittstellen&#160;(Service&#160;Access&#160;Points)&#160;zwischen&#160;den&#160;Schichten&#160;als&#160;<br/>Übergabepunkt<br/>
+9<br/>
+<hr/>
+<a name=10></a><img src="headeranalyse/header-10_1.png"/><br/>
+<img src="headeranalyse/header-10_2.png"/><br/>
+<img src="headeranalyse/header-10_3.png"/><br/>
+<img src="headeranalyse/header-10_4.png"/><br/>
+<b>Das&#160;OSI&#160;7&#160;Modell</b><br/>
+Dabei&#160;erhalten&#160;die&#160;Daten&#160;bei&#160;der Übertragung&#160;pro&#160;durchlaufener&#160;Schicht&#160;je&#160;einen&#160;<br/>
+weiteren&#160;Header,&#160;ab&#160;Schicht 2&#160;dann&#160;auch&#160;einen&#160;Trailer&#160;zur Datensicherung.<br/>
+10<br/>
+<hr/>
+<a name=11></a><img src="headeranalyse/header-11_1.png"/><br/>
+<img src="headeranalyse/header-11_2.png"/><br/>
+<img src="headeranalyse/header-11_3.png"/><br/>
+Encapsulation<br/>
+•&#160;<b>Protokolle&#160;aus höheren&#160;</b><br/>
+<b>Schichten&#160;</b>(5-7)&#160;<b>nutzen&#160;</b>die&#160;<br/>
+<b>Dienste&#160;</b>der&#160;Protokolle&#160;<b>der&#160;</b><br/>
+<b>niederen&#160;Schichten&#160;</b>(1-4).<br/>
+•&#160;Die&#160;<b>Protokollinformationen</b><br/>
+aller&#160;Protokolle&#160;sind&#160;<br/>
+<b>notwendig&#160;</b>für&#160;den&#160;<br/>
+reibungslosen&#160;Datentransfer<br/>
+•&#160;diese&#160;werden&#160;transferiert&#160;<br/>
+durch&#160;<b>Encapsulation</b><br/>
+11<br/>
+<hr/>
+<a name=12></a><img src="headeranalyse/header-12_1.png"/><br/>
+<img src="headeranalyse/header-12_2.png"/><br/>
+<b>Encapsulation</b><br/>
+•<br/>
+Grundlegend&#160;bestehen&#160;Header&#160;aus&#160;einer&#160;ganzen&#160;Reihe&#160;von&#160;Daten<br/>
+–&#160;Je&#160;tiefer&#160;die&#160;Schicht,&#160;desto&#160;mehr&#160;Elemente&#160;besitzt&#160;der&#160;Header&#160;(sog.&#160;<b>Encapsulation</b>)<br/>
+•&#160;Bsp.:&#160;IP-Header<br/>
+<b>Schicht&#160;/&#160;Bezeichnung&#160;des&#160;Headers</b><br/>
+<b>Grundlegender&#160;Aufbau&#160;des&#160;Headers</b><br/>
+Anwendungsschichten:&#160;<b>Daten&#160;</b><br/>
+Daten<br/>
+Transportschicht:&#160;<b>Datagramm</b><br/>
+TCP-Header&#160;Daten<br/>
+Netzwerkschicht:&#160;<b>Paket</b><br/>
+IP-Header TCP-Header&#160;Daten<br/>
+Datenverbindungsschicht:&#160;<b>Frame</b><br/>
+Eth-Header&#160;IP-Header&#160;TCP-Header&#160;Daten<br/>
+Bitübertragungsschicht:&#160;<b>Bits</b><br/>
+1000101011011010010001011100…<br/>
+12<br/>
+<hr/>
+<a name=13></a><img src="headeranalyse/header-13_1.png"/><br/>
+<img src="headeranalyse/header-13_2.png"/><br/>
+<img src="headeranalyse/header-13_3.png"/><br/>
+<img src="headeranalyse/header-13_4.png"/><br/>
+Encapsulation<br/>
+•&#160;<b>Encapsulation</b>:&#160;Daten&#160;der&#160;<br/>
+Protokollheader&#160;der&#160;höheren&#160;<br/>
+Schicht&#160;in&#160;Protokoll&#160;der&#160;niederen&#160;<br/>
+Schicht&#160;<b>verpacken</b><br/>
+Sender&#160;und&#160;<br/>
+•&#160;Analogie:&#160;Brief&#160;im&#160;Briefumschlag<br/>
+Empfänger<br/>
+13<br/>
+<hr/>
+<a name=14></a><img src="headeranalyse/header-14_1.png"/><br/>
+<img src="headeranalyse/header-14_2.png"/><br/>
+<img src="headeranalyse/header-14_3.png"/><br/>
+Decapsulation<br/>
+•&#160;Dabei&#160;durchlaufen&#160;die&#160;einzelnen&#160;<br/>
+<b>Protokollstacks&#160;</b>vertikal&#160;alle&#160;OSI-<br/>
+Schichten&#160;und&#160;die&#160;<br/>
+Informationen&#160;der&#160;höheren&#160;<br/>
+Dienste&#160;werden&#160;von&#160;den&#160;<br/>
+Protokollen&#160;der&#160;niedereren&#160;<br/>
+Dienste&#160;<b>encapsulated</b><br/>
+(„eingepackt“)beim&#160;Sender&#160;und&#160;<br/>
+beim&#160;Empfänger&#160;<b>decapsulated</b><br/>
+(„ausgepackt“).<br/>
+•&#160;Analogie:&#160;Brief<br/>
+14<br/>
+<hr/>
+<a name=15></a><img src="headeranalyse/header-15_1.png"/><br/>
+<img src="headeranalyse/header-15_2.png"/><br/>
+<img src="headeranalyse/header-15_3.png"/><br/>
+<b>Encapsulation&#160;-&#160;Essentials</b><br/>
+15<br/>
+<hr/>
+<a name=16></a><img src="headeranalyse/header-16_1.png"/><br/>
+<img src="headeranalyse/header-16_2.png"/><br/>
+<img src="headeranalyse/header-16_3.png"/><br/>
+<b>Decapsulation&#160;-&#160;Essentials</b><br/>
+16<br/>
+<hr/>
+<a name=17></a><img src="headeranalyse/header-17_1.png"/><br/>
+<img src="headeranalyse/header-17_2.png"/><br/>
+<img src="headeranalyse/header-17_3.png"/><br/>
+<img src="headeranalyse/header-17_4.png"/><br/>
+<img src="headeranalyse/header-17_5.png"/><br/>
+<b>Datentransfer&#160;–&#160;Header&#160;als&#160;Informationsträger</b><br/>
+Layer&#160;5&#160;-&#160;7<br/>
+Email&#160;(POP/IMAP)&#160;<br/>
+(+&#160;Verschlüsselung)<br/>
+Layer&#160;4<br/>
+TCP:&#160;Port,&#160;<br/>
+Segmentnr.<br/>
+Source/Dest.&#160;<br/>
+Layer&#160;3<br/>
+IP<br/>
+Layer&#160;2<br/>
+Source/Dest.&#160;<br/>
+MAC, FCS<br/>
+Layer&#160;1<br/>
+Bitstrom<br/>
+17<br/>
+<hr/>
+<a name=18></a><img src="headeranalyse/header-18_1.png"/><br/>
+<img src="headeranalyse/header-18_2.png"/><br/>
+<b>Arbeitsauftrag</b><br/>
+Beschreiben&#160;Sie&#160;mit&#160;eigenen&#160;Worten,&#160;welche&#160;Schichten&#160;ein&#160;Datenpaket&#160;von&#160;der&#160;Quelle&#160;zur&#160;Senke&#160;<br/>durchläuft&#160;und&#160;was&#160;die&#160;jeweilige&#160;Schicht&#160;dabei&#160;macht.&#160;Nutzen&#160;Sie&#160;hierzu&#160;das&#160;Elektronik-Kompendium&#160;unter&#160;<br/>http://www.elektronik-kompendium.de/sites/kom/0301201.htm.<br/>
+18<br/>
+<hr/>
+<a name=19></a><img src="headeranalyse/header-19_1.png"/><br/>
+<img src="headeranalyse/header-19_2.png"/><br/>
+Aufbau&#160;von&#160;Headern<br/>
+19<br/>
+<hr/>
+<a name=20></a><img src="headeranalyse/header-20_1.png"/><br/>
+<img src="headeranalyse/header-20_2.png"/><br/>
+<img src="headeranalyse/header-20_3.png"/><br/>
+<b>Aufbau&#160;von&#160;Headern</b><br/>
+•<br/>
+Werden&#160;grundlegend&#160;als&#160;<b>Strukturgramm&#160;</b>mit&#160;Blöcken&#160;von&#160;32&#160;Bit&#160;Länge&#160;dargestellt<br/>
+•<br/>
+Dabei&#160;steht&#160;<b>jede&#160;Zeile&#160;</b>des&#160;Strukturgramms&#160;für&#160;<b>einen&#160;32-Bit-Block</b><br/>
+–&#160;Bsp.:&#160;IP-Header<br/>
+20<br/>
+<hr/>
+<a name=21></a><img src="headeranalyse/header-21_1.png"/><br/>
+<img src="headeranalyse/header-21_2.png"/><br/>
+<b>Aufbau&#160;von&#160;Headern</b><br/>
+•<br/>
+Dabei&#160;sind&#160;die&#160;Felder&#160;innerhalb&#160;des&#160;Strukturgramms&#160;je&#160;nach&#160;Protokoll&#160;unterschiedlich&#160;→&#160;Bei&#160;<br/>Unsicherheit&#160;nachsehen!<br/>
+•<br/>
+<b>Protokolle&#160;</b>sind&#160;einem&#160;bestimmten&#160;<b>Port</b>,&#160;d.h.&#160;<b>einer&#160;</b>(meist&#160;fest&#160;dem&#160;Dienst&#160;zugeordneten)&#160;<br/><b>Schnittstelle&#160;zugeordnet</b>,&#160;über&#160;die&#160;die&#160;Kommunikation&#160;zwischen&#160;Quelle&#160;und&#160;Senke&#160;&#160;abläuft.<br/>
+•<br/>
+Unterscheidung&#160;der&#160;Ports&#160;in:&#160;<br/>
+–&#160;Die&#160;„<b>well-known&#160;ports</b>“&#160;von&#160;<b>1&#160;–&#160;1023</b>:&#160;Fester&#160;Dienst&#160;(Protokoll)<br/>
+–&#160;Die&#160;„<b>registerd&#160;ports</b>“&#160;von&#160;<b>1024&#160;–&#160;49151</b>:&#160;Unterschiedliche&#160;Dienste<br/>
+–&#160;Die&#160;„<b>dynamic&#160;ports</b>“&#160;von&#160;<b>49152&#160;–&#160;65535</b>:&#160;Offen&#160;für&#160;alle&#160;Verbindungen<br/>
+•<br/>
+Schreibweise:&#160;192.168.10.1:80<br/>
+IP<br/>
+Port&#160;(TCP)<br/>
+21<br/>
+<hr/>
+<a name=22></a><img src="headeranalyse/header-22_1.png"/><br/>
+<img src="headeranalyse/header-22_2.png"/><br/>
+<b>Arbeitsauftrag</b><br/>
+•<br/>
+Bearbeiten&#160;Sie&#160;das&#160;Arbeitsblatt&#160;mit&#160;den&#160;Aufgaben&#160;zu&#160;Protokollen&#160;und&#160;Ports.<br/>
+22<br/>
+<hr/>
+<a name=23></a><img src="headeranalyse/header-23_1.png"/><br/>
+<img src="headeranalyse/header-23_2.png"/><br/>
+Vorstellung&#160;verschiedener&#160;<br/>
+Header<br/>
+23<br/>
+<hr/>
+<a name=24></a><img src="headeranalyse/header-24_1.png"/><br/>
+<img src="headeranalyse/header-24_2.png"/><br/>
+<b>Der&#160;IPv4-Header</b><br/>
+•&#160;Für&#160;viele&#160;Dienste&#160;zur Verbindung&#160;zwischen&#160;Computern wird&#160;eine&#160;<br/>
+IP-Verbindung&#160;genutzt.<br/>
+•&#160;Da&#160;<b>TCP/IP&#160;</b>die&#160;<b>älteste&#160;verbindungsorientierte&#160;Protokoll-</b><br/>
+<b>Familie&#160;</b>darstellt,&#160;ist&#160;Kenntnis&#160;der Bestandteile&#160;dieses&#160;Headers&#160;<br/>sehr&#160;wichtig.<br/>
+•&#160;Dabei&#160;sind&#160;die&#160;Header&#160;von&#160;IPv4&#160;und IPv6&#160;unterschiedlich.<br/>
+24<br/>
+<hr/>
+<a name=25></a><img src="headeranalyse/header-25_1.png"/><br/>
+<img src="headeranalyse/header-25_2.png"/><br/>
+<img src="headeranalyse/header-25_3.png"/><br/>
+Bestandteile&#160;eines&#160;IPv4 Headers<br/>
+•<br/>
+Version:&#160;IPv4&#160;<br/>
+•<br/>
+IP-Header-Length&#160;(4&#160;Bit&#160;lang&#160;→&#160;max.&#160;60&#160;Byte&#160;Headerlänge)<br/>
+•<br/>
+Type&#160;of&#160;Service:&#160;Priorisierung&#160;(D=Delayed,&#160;T=Throughput,&#160;<br/>
+R=Reliable)<br/>
+•<br/>
+Total&#160;Length:&#160;Gesamtlänge&#160;des&#160;Pakets<br/>
+•<br/>
+Identification:&#160;Zuordnung&#160;zu&#160;einem&#160;fragmentierten&#160;<br/>
+Datentransfer<br/>
+•<br/>
+Flags:&#160;Steuerung&#160;der&#160;Fragmente<br/>
+•<br/>
+Fragment&#160;offset:&#160;Stellung&#160;des&#160;Pakets&#160;innerhalb&#160;eines&#160;<br/>
+größeren&#160;Datenpakets<br/>
+•<br/>
+Time&#160;To&#160;Live:&#160;Lebenserwartung&#160;des&#160;Pakets&#160;bei&#160;der&#160;<br/>
+Übertragung<br/>
+•<br/>
+Protocol:&#160;Welches&#160;Protokol&#160;der&#160;höheren&#160;Schicht&#160;<br/>
+verarbeitet&#160;das&#160;Paket&#160;weiter?<br/>
+•<br/>
+Header&#160;Checksum:&#160;Prüfsumme&#160;für&#160;Kohärenz<br/>
+•<br/>
+Source&#160;Address:&#160;Quell-Adresse&#160;<br/>
+•<br/>
+Destination&#160;Address:&#160;Zieladresse<br/>
+•<br/>
+Options&#160;and&#160;Padding:&#160;ggf.&#160;werden&#160;für&#160;Routing&#160;und&#160;<br/>
+Fehlerbehebung&#160;weitere,&#160;optionale&#160;Informationen&#160;<br/>
+mitgegeben&#160;(<b>RFC&#160;791</b>),&#160;die&#160;übrigen&#160;Bits&#160;werden&#160;durch&#160;<br/>
+Nullen&#160;aufgefüllt&#160;(sog.&#160;<b>Padding</b>)<br/>
+25<br/>
+<hr/>
+<a name=26></a><img src="headeranalyse/header-26_1.png"/><br/>
+<img src="headeranalyse/header-26_2.png"/><br/>
+<b>Der&#160;IPv6-Header</b><br/>
+•&#160;IPv6&#160;nutzt&#160;<b>hexadezimale&#160;Adressen</b>,&#160;daher&#160;sind&#160;die&#160;Adressfelder&#160;größer&#160;(je&#160;<br/>
+<b>128&#160;Bit</b>).<br/>
+•&#160;IPv6&#160;benutzt&#160;einen&#160;Header&#160;mit&#160;<b>40&#160;Bytes&#160;</b>(320&#160;Bits).<br/>
+•&#160;Optionale&#160;Informationen&#160;(Verschlüsselung,&#160;MobileIPv6,&#160;Platzhalter)&#160;werden&#160;<br/>
+in&#160;einem&#160;separaten&#160;Bereich&#160;des&#160;Headers&#160;gespeichert&#160;(<b>Extention&#160;Header</b>).<br/>
+•&#160;Wird&#160;ein&#160;Extention&#160;Header&#160;genutzt,&#160;wird&#160;der&#160;Header&#160;auf&#160;<b>64&#160;Byte&#160;</b>bzw.&#160;ein&#160;<br/>
+Vielfaches&#160;von&#160;64&#160;Byte&#160;vergrößert.<br/>
+26<br/>
+<hr/>
+<a name=27></a><img src="headeranalyse/header-27_1.png"/><br/>
+<img src="headeranalyse/header-27_2.png"/><br/>
+<img src="headeranalyse/header-27_3.png"/><br/>
+Bestandteile&#160;eines&#160;IPv6-Headers<br/>
+•&#160;Version:&#160;IPv6<br/>•&#160;Traffic&#160;Class:&#160;Vergleichbar&#160;IPv4&#160;ToS<br/>•&#160;Flow&#160;Label:&#160;vgl.&#160;QoS<br/>•&#160;Payloadlength:&#160;Länge&#160;des&#160;Ipv6-<br/>
+Headers&#160;in&#160;Byte&#160;(mit&#160;Erweiterung,&#160;<br/>
+sofern&#160;vorhanden)<br/>
+•&#160;Next&#160;Header:&#160;Identifizierung&#160;des&#160;<br/>
+nächsten&#160;Kopfdatenbereichs&#160;oder&#160;<br/>
+des&#160;benutzten&#160;Protokolls<br/>
+•&#160;Hop&#160;Limit:&#160;vgl.&#160;TTL<br/>•&#160;Source&#160;/&#160;Destination&#160;Adress:&#160;Quell-/&#160;<br/>
+Zieladresse<br/>
+27<br/>
+<hr/>
+<a name=28></a><img src="headeranalyse/header-28_1.png"/><br/>
+<img src="headeranalyse/header-28_2.png"/><br/>
+<img src="headeranalyse/header-28_3.png"/><br/>
+<img src="headeranalyse/header-28_4.png"/><br/>
+<img src="headeranalyse/header-28_5.png"/><br/>
+<img src="headeranalyse/header-28_6.png"/><br/>
+<img src="headeranalyse/header-28_7.png"/><br/>
+<img src="headeranalyse/header-28_8.png"/><br/>
+<img src="headeranalyse/header-28_9.png"/><br/>
+<img src="headeranalyse/header-28_10.png"/><br/>
+<img src="headeranalyse/header-28_11.png"/><br/>
+<img src="headeranalyse/header-28_12.png"/><br/>
+<img src="headeranalyse/header-28_13.png"/><br/>
+<img src="headeranalyse/header-28_14.png"/><br/>
+<img src="headeranalyse/header-28_15.png"/><br/>
+<img src="headeranalyse/header-28_16.png"/><br/>
+<img src="headeranalyse/header-28_17.png"/><br/>
+<img src="headeranalyse/header-28_18.png"/><br/>
+<img src="headeranalyse/header-28_19.png"/><br/>
+<img src="headeranalyse/header-28_20.png"/><br/>
+<img src="headeranalyse/header-28_21.png"/><br/>
+<img src="headeranalyse/header-28_22.png"/><br/>
+<img src="headeranalyse/header-28_23.png"/><br/>
+<img src="headeranalyse/header-28_24.png"/><br/>
+<img src="headeranalyse/header-28_25.png"/><br/>
+<img src="headeranalyse/header-28_26.png"/><br/>
+<img src="headeranalyse/header-28_27.png"/><br/>
+<img src="headeranalyse/header-28_28.png"/><br/>
+<img src="headeranalyse/header-28_29.png"/><br/>
+<img src="headeranalyse/header-28_30.png"/><br/>
+<img src="headeranalyse/header-28_31.png"/><br/>
+<img src="headeranalyse/header-28_32.png"/><br/>
+<img src="headeranalyse/header-28_33.png"/><br/>
+<img src="headeranalyse/header-28_34.png"/><br/>
+<img src="headeranalyse/header-28_35.png"/><br/>
+<img src="headeranalyse/header-28_36.png"/><br/>
+<img src="headeranalyse/header-28_37.png"/><br/>
+<img src="headeranalyse/header-28_38.png"/><br/>
+<img src="headeranalyse/header-28_39.png"/><br/>
+<img src="headeranalyse/header-28_40.png"/><br/>
+<img src="headeranalyse/header-28_41.png"/><br/>
+<img src="headeranalyse/header-28_42.png"/><br/>
+<img src="headeranalyse/header-28_43.png"/><br/>
+<img src="headeranalyse/header-28_44.png"/><br/>
+<img src="headeranalyse/header-28_45.png"/><br/>
+<img src="headeranalyse/header-28_46.png"/><br/>
+<img src="headeranalyse/header-28_47.png"/><br/>
+<img src="headeranalyse/header-28_48.png"/><br/>
+<img src="headeranalyse/header-28_49.png"/><br/>
+<img src="headeranalyse/header-28_50.png"/><br/>
+<img src="headeranalyse/header-28_51.png"/><br/>
+<img src="headeranalyse/header-28_52.png"/><br/>
+<img src="headeranalyse/header-28_53.png"/><br/>
+<img src="headeranalyse/header-28_54.png"/><br/>
+<img src="headeranalyse/header-28_55.png"/><br/>
+<img src="headeranalyse/header-28_56.png"/><br/>
+<img src="headeranalyse/header-28_57.png"/><br/>
+<img src="headeranalyse/header-28_58.png"/><br/>
+<img src="headeranalyse/header-28_59.png"/><br/>
+<img src="headeranalyse/header-28_60.png"/><br/>
+<img src="headeranalyse/header-28_61.png"/><br/>
+<img src="headeranalyse/header-28_62.png"/><br/>
+<img src="headeranalyse/header-28_63.png"/><br/>
+<img src="headeranalyse/header-28_64.png"/><br/>
+<img src="headeranalyse/header-28_65.png"/><br/>
+<img src="headeranalyse/header-28_66.png"/><br/>
+<img src="headeranalyse/header-28_67.png"/><br/>
+<img src="headeranalyse/header-28_68.png"/><br/>
+<img src="headeranalyse/header-28_69.png"/><br/>
+<img src="headeranalyse/header-28_70.png"/><br/>
+<img src="headeranalyse/header-28_71.png"/><br/>
+<img src="headeranalyse/header-28_72.png"/><br/>
+<img src="headeranalyse/header-28_73.png"/><br/>
+<img src="headeranalyse/header-28_74.png"/><br/>
+<img src="headeranalyse/header-28_75.png"/><br/>
+<img src="headeranalyse/header-28_76.png"/><br/>
+<img src="headeranalyse/header-28_77.png"/><br/>
+<img src="headeranalyse/header-28_78.png"/><br/>
+<img src="headeranalyse/header-28_79.png"/><br/>
+<img src="headeranalyse/header-28_80.png"/><br/>
+TCP-Verbindungsaufbau<br/>
+•&#160;Verbindungsaufbau&#160;mit&#160;TCP&#160;(sog.&#160;<br/>
+„three&#160;way&#160;handshake“):<br/>
+–&#160;Anfrage&#160;an&#160;Zielrechner&#160;mit&#160;Dienst,&#160;<br/>
+Portnummer&#160;und&#160;Bitte&#160;zur&#160;<br/>Synchronisation&#160;(SYN)&#160;mit&#160;einer&#160;<br/>spezifischen&#160;Vorgangsnummer&#160;<br/>(ISN=Initial&#160;Sequence&#160;Number)<br/>
+–&#160;Ziel&#160;bestätigt&#160;bei&#160;Vorhandensein&#160;des&#160;<br/>
+Dienstes&#160;durch&#160;Rückantwort;&#160;dabei&#160;<br/>wird&#160;ACK-Signal&#160;gesetzt&#160;(als&#160;ISN+1)<br/>
+–&#160;Zum&#160;Verbindungsaufbau&#160;wird&#160;<br/>
+Bestätigung&#160;geschickt&#160;von&#160;Quelle&#160;mit&#160;<br/>ACK+1,&#160;ISN+1<br/>
+28<br/>
+<hr/>
+<a name=29></a><img src="headeranalyse/header-29_1.png"/><br/>
+<img src="headeranalyse/header-29_2.png"/><br/>
+<img src="headeranalyse/header-29_3.png"/><br/>
+Aufbau des TCP-Headers<br/>
+•<br/>
+Source&#160;port&#160;/&#160;destination&#160;port:&#160;Quell-&#160;und&#160;Zielport&#160;des&#160;<br/>
+angefragten&#160;Dienstes<br/>
+•<br/>
+Sequence&#160;Number:&#160;Sortiert&#160;die&#160;TCP-Anfragen&#160;und&#160;setzt&#160;die&#160;<br/>
+SYN-Flag<br/>
+•<br/>
+Acknowledgement&#160;Number:&#160;Gibt&#160;Sequenznummer&#160;des&#160;<br/>
+Empfängers&#160;wieder,&#160;wenn&#160;ACK&#160;vorhanden<br/>
+•<br/>
+Data&#160;Offset:&#160;Lange&#160;des&#160;Headers&#160;in&#160;32-Bit-Blöcken,&#160;gibt&#160;<br/>
+Startadresse&#160;wieder<br/>
+•<br/>
+Reserved:&#160;Momentan&#160;nicht&#160;genutzt<br/>
+•<br/>
+Control&#160;Flags:&#160;Dienen&#160;zur&#160;Kennzeichnung&#160;bestimmter&#160;<br/>
+Eigenschaften&#160;bei&#160;der&#160;Datenverarbeitung,&#160;z.B.:&#160;ECE=Netzwerk&#160;<br/>
+überlastet,&#160;Senderate&#160;reduzieren;&#160;CWR=Überlast&#160;entfernt;&#160;<br/>
+URG=Dringend;&#160;ACK;&#160;PSH=Push;&#160;RST=Reset;&#160;SYN;&#160;FIN<br/>
+•<br/>
+Window:&#160;Anzahl&#160;der&#160;Daten-Oktette,&#160;die&#160;von&#160;ACK&#160;gesendet&#160;<br/>
+worden&#160;sind<br/>
+•<br/>
+Checksum:&#160;Dient&#160;zum&#160;Erkennen&#160;von&#160;Übertragungsfehlern<br/>
+•<br/>
+Urgent&#160;Pointer:&#160;Nur&#160;gültig&#160;mit&#160;URG-Flag;&#160;gibt&#160;zusammen&#160;mit&#160;<br/>
+Sequenz-Nummer&#160;die&#160;erste&#160;Position&#160;der&#160;Bytes&#160;nach&#160;dem&#160;<br/>
+Urgent&#160;Pointer<br/>
+29<br/>
+<hr/>
+<a name=30></a><img src="headeranalyse/header-30_1.png"/><br/>
+<img src="headeranalyse/header-30_2.png"/><br/>
+<img src="headeranalyse/header-30_3.png"/><br/>
+Beispiel&#160;eines Datentransfers&#160;mit TCP<br/>
+•&#160;Bei&#160;Files&#160;über&#160;<b>1500&#160;Byte&#160;</b><br/>
+werden&#160;diese&#160;segmentiert.<br/>
+•&#160;Dabei&#160;werden&#160;die&#160;<br/>
+Nutzerdaten&#160;zuerst&#160;in&#160;eine&#160;<br/>
+<b>Puffer&#160;</b>geladen&#160;(„Buffering“)<br/>
+•&#160;Über&#160;die&#160;<b>Sequenznummer</b><br/>
+bei&#160;IP&#160;werden&#160;die&#160;einzelnen&#160;<br/>
+Segmente&#160;zuordbar.<br/>
+•&#160;Bei&#160;Signal&#160;Loss&#160;oder&#160;Buffer&#160;<br/>
+Overflow&#160;wird&#160;ein&#160;Signal&#160;zur&#160;<br/>
+Quelle&#160;geschickt.<br/>
+30<br/>
+<hr/>
+<a name=31></a><img src="headeranalyse/header-31_1.png"/><br/>
+<img src="headeranalyse/header-31_2.png"/><br/>
+<b>Der&#160;UDP-Header</b><br/>
+•&#160;UDP&#160;ist&#160;ein&#160;<b>verbindungsloses&#160;</b>Protokoll,&#160;d.h.&#160;es&#160;hat keine&#160;<br/>
+Sicherungssysteme,&#160;keine&#160;Fehlerüberprüfung&#160;und keine&#160;<br/>Verschlüsselung.<br/>
+•&#160;<b>Vorteil</b>:&#160;Verbindung&#160;wird unempfindlicher&#160;gegenüber&#160;Packet&#160;Loss&#160;<br/>
+→&#160;Sprach-&#160;/&#160;Medienübertragung<br/>
+•&#160;<b>Nachteil</b>:&#160;Bei&#160;Packet&#160;Loss&#160;kommt&#160;es&#160;zu&#160;Qualitätsverlust.<br/>
+31<br/>
+<hr/>
+<a name=32></a><img src="headeranalyse/header-32_1.png"/><br/>
+<img src="headeranalyse/header-32_2.png"/><br/>
+<img src="headeranalyse/header-32_3.png"/><br/>
+Aufbau von UDP-Headern<br/>
+•&#160;Sorce&#160;/&#160;Destination&#160;Port:&#160;Port&#160;der&#160;<br/>
+Quelle&#160;/&#160;Senke,&#160;je&#160;nach&#160;Protokoll<br/>
+•&#160;UDP-length:&#160;Gibt&#160;Länge&#160;des&#160;<br/>
+Datagramms&#160;in&#160;Oktetten&#160;an,&#160;d.h.&#160;<br/>
+Max&#160;216-1&#160;Byte&#160;=&#160;<b>65.535&#160;Byte&#160;</b><br/>
+<b>Payload</b><br/>
+•&#160;UDP&#160;Checksum:&#160;ggf.&#160;mitgelieferte&#160;<br/>
+<b>16&#160;Bit&#160;</b>große&#160;Prüfsumme<br/>
+•&#160;Meist&#160;wird&#160;vor&#160;einen&#160;UDP-Header&#160;<br/>
+ein&#160;IP-Header&#160;für&#160;den&#160;<br/>
+Verbindungsaufbau&#160;angehängt.<br/>
+32<br/>
+<hr/>
+<a name=33></a><img src="headeranalyse/header-33_1.png"/><br/>
+<img src="headeranalyse/header-33_2.png"/><br/>
+<b>Der&#160;ARP-Header</b><br/>
+•&#160;<b>A</b>dress&#160;<b>R</b>esolution&#160;<b>P</b>rotocoll&#160;dient zur&#160;<b>Ermittlung&#160;der&#160;MAC-</b><br/>
+<b>Adresse&#160;</b>bei&#160;bekannter&#160;IP-Adresse.<br/>
+•&#160;Wird ausschließlich&#160;bei&#160;IPv4&#160;genutzt,&#160;bei&#160;IPv6&#160;dient&#160;hierzu&#160;<br/>
+<b>N</b>eighbour&#160;<b>D</b>iscovery&#160;<b>P</b>rotocoll.<br/>
+•&#160;Diese&#160;Daten&#160;werden&#160;in&#160;einer&#160;<b>Routingtabelle&#160;</b>gespeichert.<br/>
+•&#160;Bei&#160;Fehlern&#160;dieses&#160;Protokolls&#160;kommt&#160;keine&#160;Verbindung&#160;zustande.<br/>
+33<br/>
+<hr/>
+<a name=34></a><img src="headeranalyse/header-34_1.png"/><br/>
+<img src="headeranalyse/header-34_2.png"/><br/>
+<img src="headeranalyse/header-34_3.png"/><br/>
+Ablauf des ARP-Request<br/>
+•&#160;Da&#160;ARP-Header&#160;sehr&#160;klein&#160;sind&#160;<br/>
+(ca.&#160;<b>30&#160;Byte</b>),&#160;wird&#160;mit&#160;<b>Padding</b><br/>
+das&#160;Paket&#160;aufgefüllt.<br/>
+•&#160;ARP&#160;ist&#160;leicht&#160;an&#160;dem&#160;Typfeld&#160;im&#160;<br/>
+Ethernetframe&#160;<b>0X0806&#160;(2054)&#160;</b><br/>
+erkennbar.<br/>
+•&#160;ARP&#160;erkennt&#160;aus&#160;der&#160;<b>ARP-Tabelle&#160;</b><br/>
+<b>des&#160;Hosts&#160;</b>die&#160;gesuchte&#160;IP.<br/>
+34<br/>
+<hr/>
+<a name=35></a><img src="headeranalyse/header-35_1.png"/><br/>
+<img src="headeranalyse/header-35_2.png"/><br/>
+<b>RARP</b><br/>
+•&#160;Mit&#160;RARP&#160;(Reverse&#160;<b>A</b>dress&#160;<b>R</b>esolution&#160;<b>P</b>rotocoll)&#160;&#160;kann&#160;von&#160;einer&#160;Mac-<br/>
+Adresse&#160;auf&#160;eine&#160;unbekannte&#160;IP-Adresse&#160;geschlossen&#160;werden.<br/>
+•&#160;Der&#160;Header&#160;ist&#160;im&#160;Ethernet-Typfeld&#160;mit&#160;&#160;<b>0x8035&#160;</b>gekennzeichnet.<br/>
+•&#160;RARP&#160;funktioniert&#160;nur&#160;innerhalb&#160;eines&#160;<b>Subnetzes</b>.<br/>
+•&#160;Bei&#160;fehlerhaftem&#160;ARP&#160;/RARP&#160;kann&#160;kein Routing&#160;stattfinden.&#160;Meist&#160;liegen&#160;<br/>
+<b>falsche&#160;manuelle&#160;Routingtabellen&#160;</b>vor.<br/>
+35<br/>
+<hr/>
+<a name=36></a><img src="headeranalyse/header-36_1.png"/><br/>
+<img src="headeranalyse/header-36_2.png"/><br/>
+<b>Network&#160;Access&#160;Translation&#160;(NAT)</b><br/>
+•<br/>
+Dient&#160;zur&#160;<b>automatischen&#160;Zuordnung&#160;</b>der&#160;<b>Adressen&#160;</b>in&#160;einem&#160;Rechnernetzwerk,&#160;um&#160;verschiedene&#160;<br/>Netze&#160;zu&#160;verbinden.<br/>
+•<br/>
+Zwei&#160;Formen:<br/>
+–&#160;Ordnet&#160;die&#160;IPv4-Adresse&#160;einer&#160;Quelle&#160;in&#160;einem&#160;Subnetz&#160;der&#160;öffentlichen&#160;Adresse&#160;zu&#160;(<b>Source-NAT</b>)<br/>
+–&#160;Ordnet&#160;Dienste&#160;von&#160;unterschiedlichen&#160;Diensten&#160;einer&#160;IP&#160;zu&#160;(z.B.&#160;bei&#160;Servern,&#160;sog.&#160;<b>Destination-NAT</b>)<br/>
+•<br/>
+<b>Pro&#160;Verbindung&#160;eine&#160;NAT-Session</b>,&#160;hierbei&#160;werden&#160;<br/>
+–&#160;<b>IP&#160;der&#160;Quelle&#160;</b>im&#160;<b>privaten&#160;Netz&#160;</b>mit&#160;der&#160;<b>IP&#160;</b>des&#160;<b>NAT-Routers&#160;getauscht</b><br/>
+–&#160;<b>MAC&#160;</b>der&#160;<b>Quelle&#160;</b>im&#160;privaten&#160;Netz&#160;mit&#160;der&#160;<b>MAC&#160;</b>des&#160;<b>NAT-Routers&#160;</b>getauscht<br/>
+–&#160;Der&#160;<b>Router&#160;speichert&#160;</b>diese&#160;<b>Daten</b>,&#160;um&#160;dann&#160;die&#160;Antwort&#160;an&#160;die&#160;Quelle&#160;im&#160;privaten&#160;Netz&#160;zu&#160;versenden.<br/>
+•<br/>
+Kann&#160;auch&#160;genutzt&#160;werden,&#160;um&#160;IPv4&#160;in&#160;IPv6&#160;umzusetzen&#160;(<b>NAT&#160;64</b>).<br/>
+36<br/>
+<hr/>
+<a name=37></a><img src="headeranalyse/header-37_1.png"/><br/>
+<img src="headeranalyse/header-37_2.png"/><br/>
+<b>Domain Name&#160;System&#160;(DNS)</b><br/>
+•<br/>
+System&#160;zur&#160;Auflösung&#160;von&#160;Computernamen&#160;in&#160;IP-Adressen&#160;&#160;„Telefonbuch&#160;des&#160;Internets“<br/>
+•&#160;Beispiel:&#160;<br/>
+FTPServer01.Institut-fuer-Festkörperphysik.frauenhofer.de.<br/>entspricht&#160;der&#160;Informationsorganisation:&#160;<br/>HOSTNAME.SUBDOMAIN.SECONDLEVELDOMAIN.TOPLEVELDOMAINROOT<br/>
+–&#160;<b>Hostname&#160;</b>ist&#160;der&#160;<b>eindeutige&#160;Name&#160;innerhalb&#160;einer&#160;Subdomain<br/></b>–&#160;<b>Subdomain&#160;</b>ist&#160;eine&#160;<b>Unterteilung&#160;innerhalb&#160;einer&#160;größeren&#160;Einheit&#160;</b>(der&#160;Second-Level-<br/>
+Domain)<br/>
+–&#160;<b>Second-level-Domain&#160;</b>ist&#160;die&#160;<b>Schnittstelle&#160;</b>zwischen&#160;<b>WWW&#160;</b>und&#160;dem&#160;hinter&#160;der&#160;<b>SLD</b><br/>
+stehenden&#160;Unternehmen.&#160;Diese werden&#160;(über&#160;NIC&#160;und&#160;jur.&#160;Person)&#160;eindeutig&#160;zuordbar&#160;<br/>verwaltet.<br/>
+–&#160;<b>ROOT&#160;</b>entspricht&#160;dem&#160;<b>Punkt&#160;am&#160;Ende&#160;der&#160;Adresse</b>.&#160;Auf&#160;ROOT-Servern&#160;wird&#160;die&#160;Verbindung&#160;<br/>
+zu&#160;den&#160;einzelnen&#160;Top-Level-Domains&#160;gespeichert.<br/>
+–&#160;<b>FDQN&#160;</b>(Fully&#160;Qualified&#160;Domain&#160;Name)&#160;besteht&#160;aus&#160;der&#160;<b>eindeutigen&#160;Kombination&#160;eines&#160;</b><br/>
+<b>Gerätenamens,&#160;der&#160;Second-&#160;und&#160;Top-Level-Domain</b>.&#160;<br/>
+37<br/>
+<hr/>
+<a name=38></a><img src="headeranalyse/header-38_1.png"/><br/>
+<img src="headeranalyse/header-38_2.png"/><br/>
+<b>Domain Name&#160;System&#160;(DNS)</b><br/>
+•&#160;Zugänge&#160;zu&#160;dem&#160;einzelnen&#160;Rechner&#160;werden&#160;über&#160;<b>DNS-Server</b><br/>
+verwaltet.<br/>
+•&#160;An&#160;DNS-Datenbanken&#160;dürfen keine&#160;Veränderungen&#160;<br/>
+vorgenommen&#160;werden!<br/>
+•&#160;Diese&#160;Datenbanken&#160;verwalten dezentral&#160;Teile der&#160;DNS-Struktur.<br/>
+–&#160;Vorteile:&#160;leicht&#160;<b>erweiterbar</b>,&#160;<b>flexibel</b>,&#160;<b>eindeutiger&#160;Name&#160;</b>innerhalb&#160;<br/>
+<b>hierarchischer&#160;Gliederung&#160;</b><br/>
+38<br/>
+<hr/>
+<a name=39></a><img src="headeranalyse/header-39_1.png"/><br/>
+<img src="headeranalyse/header-39_2.png"/><br/>
+<b>Domain Name&#160;System&#160;(DNS)</b><br/>
+•&#160;Um&#160;Rechner&#160;zu&#160;erreichen,&#160;wird&#160;einer&#160;<b>FQDN&#160;eine&#160;IP-Adresse&#160;zugeordnet</b><br/>
+(sog.&#160;<b>Host-Datei</b>)<br/>
+–&#160;Beispiel:&#160;<br/>
+[IP-Adresse]&#160;[Mindestens&#160;ein&#160;Leerzeichen]&#160;[FQDN],&#160;optional&#160;#[Kommentar]<br/>192.168.0.1&#160;server01.testserver.tv.&#160;<br/>
+•&#160;Diese&#160;Daten&#160;werden&#160;auf&#160;einem&#160;<b>DNS-Server&#160;</b>hinterlegt,&#160;der&#160;weitere&#160;<br/>
+Informationen&#160;speichert&#160;(in&#160;der&#160;sog.&#160;<b>Zonendatei</b>).<br/>
+•&#160;Wurde&#160;eine&#160;Anfrage&#160;erfolgreich&#160;durchgeführt,&#160;werden&#160;Daten&#160;im&#160;<b>DNS-Cache</b><br/>
+gespeichert.&#160;Bei&#160;erneuter&#160;Anfrage&#160;an&#160;den&#160;selben&#160;Zielrechner&#160;werden&#160;diese&#160;<br/>Daten&#160;für&#160;den&#160;Verbindungsaufbau&#160;verwendet.<br/>
+39<br/>
+<hr/>
+<a name=40></a><img src="headeranalyse/header-40_1.png"/><br/>
+<img src="headeranalyse/header-40_2.png"/><br/>
+<b>Domain Name&#160;System&#160;(DNS)</b><br/>
+•&#160;Abfragevorgang auf&#160;eine unbekannte&#160;Adresse:<br/>
+–&#160;<b>Adresse&#160;</b>muss&#160;in eine&#160;<b>IP&#160;aufgelöst&#160;</b>werden&#160;→&#160;<b>DNS-Querry-Request&#160;</b>an&#160;<br/>
+nächsten&#160;<b>DNS-Server</b>.&#160;Dieser&#160;kann<br/>
+•&#160;den&#160;<b>Cache&#160;überprüfen</b><br/>
+•&#160;<b>überprüfen</b>,&#160;ob&#160;die&#160;Adresse&#160;in&#160;seiner&#160;<b>Zonendatei&#160;</b>ist<br/>
+•&#160;<b>an&#160;</b>einen&#160;anderen&#160;<b>DNS-Server&#160;weiterleiten</b><br/>
+•&#160;eine&#160;<b>iterative&#160;(d.h.&#160;wiederholte)&#160;Abfrage&#160;</b>durchführen<br/>
+40<br/>
+<hr/>
+<a name=41></a><img src="headeranalyse/header-41_1.png"/><br/>
+<img src="headeranalyse/header-41_2.png"/><br/>
+<img src="headeranalyse/header-41_3.png"/><br/>
+Domain&#160;Name&#160;System&#160;(DNS)<br/>
+•<br/>
+<b>Iterative&#160;Abfrage&#160;(Theoretisches&#160;Model)</b><br/>
+1.<br/>
+Programm&#160;stell&#160;<b>Anfrage&#160;nach&#160;IP&#160;</b>an&#160;lokalen&#160;Client.<br/>
+2.<br/>
+Die&#160;gesuchte&#160;<b>FQDN&#160;</b>wird&#160;an&#160;den&#160;dem&#160;Client&#160;zugeordneten&#160;<br/>
+<b>DNS-Serve</b>r&#160;geschickt&#160;(<b>rekursive&#160;Anfrage</b>).<br/>
+3.<br/>
+Befindet&#160;sich&#160;die&#160;FQDN&#160;<b>nicht&#160;</b>im&#160;<b>DNS-Cache</b>,&#160;stellt&#160;dieser&#160;<br/>
+eine&#160;<b>iterative&#160;Anfrage&#160;</b>an&#160;einen&#160;der&#160;<b>ROOT-Server</b>.<br/>
+4.<br/>
+Dieser&#160;verweist&#160;dann&#160;an&#160;den&#160;entsprechenden&#160;<b>Top-Level-</b><br/>
+<b>Domain-Server</b>.<br/>
+5.<br/>
+Eine&#160;weitere&#160;<b>iterative&#160;Anfrage&#160;</b>an&#160;den&#160;<b>TLD-Server&#160;</b>für&#160;die&#160;<br/>
+<b>FQDN</b>.<br/>
+6.<br/>
+Diese&#160;<b>Antwort&#160;</b>erhält&#160;der&#160;<b>DNS-Server&#160;</b>und&#160;<b>speichert&#160;</b>sie&#160;<b>im&#160;</b><br/>
+<b>Cache</b>.<br/>
+7.<br/>
+Diese&#160;Antwort&#160;wird&#160;<b>an&#160;</b>den&#160;<b>Client&#160;übermittelt</b>.<br/>
+8.<br/>
+Der&#160;<b>Client&#160;nutzt&#160;diese&#160;Daten&#160;</b>für&#160;das&#160;entsprechende&#160;<br/>
+Programm.<br/>
+•<br/>
+Voraussetzung&#160;für&#160;iterative&#160;Abfragen&#160;sind&#160;Internetzugang&#160;und&#160;<br/>
+aktuelle&#160;Datei&#160;<i>named.root</i><br/>
+41<br/>
+<hr/>
+<a name=42></a><img src="headeranalyse/header-42_1.png"/><br/>
+<img src="headeranalyse/header-42_2.png"/><br/>
+<b>Domain Name&#160;System&#160;(DNS)</b><br/>
+•&#160;Eine&#160;aktuelle&#160;Datei&#160;<i>named.root&#160;</i>wird bei&#160;Windows&#160;im&#160;Verzeichnis&#160;<br/>
+<b>DNS&#160;</b>gespeichert.<br/>
+•&#160;Es&#160;ist&#160;möglich,&#160;die von&#160;Windows&#160;bereitgestellte&#160;Liste&#160;komplett&#160;zu&#160;<br/>
+blockieren&#160;(gar&#160;kein&#160;Surfen mehr&#160;möglich)&#160;oder&#160;eine&#160;<br/>eingeschränkte&#160;Liste&#160;bereitzustellen,&#160;mit&#160;der nur&#160;bestimmte&#160;<br/>Webseiten&#160;besucht&#160;werden&#160;können.&#160;<b>Problem</b>:&#160;Kann&#160;leicht&#160;<br/>umgangen werden.<br/>
+42<br/>
+<hr/>
+<a name=43></a><img src="headeranalyse/header-43_1.png"/><br/>
+<img src="headeranalyse/header-43_2.png"/><br/>
+<b>Domain Name&#160;System&#160;(DNS)</b><br/>
+•&#160;Die&#160;Adressauflösung&#160;kann&#160;entweder&#160;als&#160;<b>Forward&#160;Lookup&#160;(FQDN&#160;</b><br/>
+<b>bekannt, IP&#160;gesucht)&#160;</b>oder&#160;als&#160;<b>Reverse&#160;Lookup&#160;(IP&#160;bekannt,&#160;<br/>FQDN&#160;gesucht)&#160;</b>durchgeführt werden.<br/>
+•&#160;DNS&#160;kann&#160;<b>statisch&#160;</b>(mit&#160;Einstellungen&#160;von&#160;Hand) oder&#160;(wesentlich&#160;<br/>
+häufiger)&#160;<b>dynamisch&#160;</b>durchgeführt&#160;werden.&#160;<br/>
+•&#160;Bei&#160;<b>dynamischem&#160;DNS&#160;</b>wird ein&#160;weiteres&#160;Protokoll&#160;genutzt,&#160;<br/>
+<b>DHCP</b><br/>
+43<br/>
+<hr/>
+<a name=44></a><img src="headeranalyse/header-44_1.png"/><br/>
+<img src="headeranalyse/header-44_2.png"/><br/>
+<img src="headeranalyse/header-44_3.png"/><br/>
+DHCP&#160;für&#160;D-DNS<br/>
+•&#160;<b>DHCP&#160;(Dynamic&#160;Host&#160;Configuration</b><br/>
+<b>Protocol)&#160;</b>dient&#160;zur&#160;dynamischen&#160;<br/>
+Adressverwaltung.&#160;Der&#160;<b>Client&#160;</b>wird&#160;<br/>
+von&#160;<b>DNS-Server&#160;</b>bei&#160;jeder&#160;neuen&#160;<br/>
+Anmeldung&#160;<b>registriert&#160;</b>(sog.&#160;<b>lease</b>).&#160;<br/>
+•&#160;Arbeitet&#160;auf&#160;<b>Ports&#160;67&#160;</b>und&#160;<b>68</b>.<br/>•&#160;DHCP&#160;nutzt&#160;<b>zur1.&#160;und&#160;2.&#160;</b><br/>
+<b>Verbindung&#160;UTP</b>,&#160;da es&#160;ungerichtet<br/>
+an&#160;den&#160;nächsten&#160;(eingestellten)&#160;<br/>
+DNS-Server&#160;<br/>
+•&#160;Maximale&#160;Paketgröße&#160;DHCP:&#160;576&#160;<br/>
+Byte<br/>
+44<br/>
+<hr/>
+<a name=45></a><img src="headeranalyse/header-45_1.png"/><br/>
+<img src="headeranalyse/header-45_2.png"/><br/>
+<img src="headeranalyse/header-45_3.png"/><br/>
+Aufbau des DHCP-Headers<br/>
+•<br/>
+op&#160;(1&#160;Byte):&#160;zeigt&#160;<b>request&#160;</b>(1)&#160;oder&#160;<b>reply&#160;</b>(2)<br/>
+•<br/>
+htype&#160;(1&#160;Byte):&#160;<b>Netztyp&#160;</b>(z.B.&#160;Ethernet)<br/>
+•<br/>
+hlen&#160;(1&#160;Byte):&#160;Länge&#160;der&#160;physikalischen&#160;Netzadresse&#160;(6&#160;=&#160;MAC)<br/>
+•<br/>
+Hops&#160;(1&#160;Byte):&#160;Anzahl&#160;der&#160;DHCP-Relay-Agents&#160;im&#160;Netz&#160;<br/>
+(optional)<br/>
+•<br/>
+Transaction&#160;Identifier&#160;(xid,&#160;4&#160;Byte):&#160;ID&#160;der&#160;Client-Server-<br/>
+Verbindung<br/>
+•<br/>
+Secs&#160;(2&#160;Byte):&#160;<b>Zeit&#160;</b>seit&#160;<b>Verbindungsaufbau</b><br/>
+•<br/>
+Flags&#160;(2&#160;Byte):&#160;<b>Zeigt,&#160;ob&#160;Client&#160;gültige&#160;IP&#160;besitzt</b>,&#160;2.&#160;Byte&#160;für&#160;<br/>
+Adresserweiterung&#160;reserviert<br/>
+•<br/>
+IP-Address&#160;(je&#160;4&#160;Bytes):&#160;Je&#160;die&#160;Client-&#160;und&#160;Server-Adresse&#160;sowie&#160;<br/>
+die&#160;Adresse&#160;des&#160;DHCP-Agents<br/>
+•<br/>
+Client&#160;Hardware&#160;Address&#160;(chaddr,&#160;16&#160;Byte):&#160;&#160;MAC&#160;des&#160;Client<br/>
+•<br/>
+Server&#160;Host&#160;Name&#160;(sname,&#160;64&#160;Byte):&#160;Name&#160;des&#160;DHCP-Server&#160;<br/>
+(optional)<br/>
+•<br/>
+Boot&#160;File&#160;Name&#160;(file,&#160;128&#160;Byte):&#160;Name&#160;der&#160;Datei,&#160;die&#160;vom&#160;<br/>
+Server&#160;übertragen&#160;wird&#160;(mit&#160;TFTP),&#160;optional<br/>
+•<br/>
+options&#160;(variabel,&#160;max.&#160;312&#160;Byte):&#160;Beinhaltet&#160;DHCP-Parameter&#160;<br/>
+und&#160;Optionen<br/>
+45<br/>
+<hr/>
+<a name=46></a><img src="headeranalyse/header-46_1.png"/><br/>
+<img src="headeranalyse/header-46_2.png"/><br/>
+<img src="headeranalyse/header-46_3.png"/><br/>
+VPN<br/>
+•&#160;<b>VPN&#160;</b>(Virtual&#160;Private&#160;Network):&#160;<br/>
+<b>Sicherer&#160;Zugriff&#160;</b>auf&#160;das&#160;(Firmen-)&#160;<br/>
+Netzwerk&#160;<b>von außerhalb&#160;</b>des&#160;<br/>
+Netzwerks<br/>
+•&#160;Bei&#160;Zugriff&#160;auf&#160;Netzwerk&#160;von Außen&#160;<br/>
+wird&#160;mit&#160;speziellen&#160;Protokollen&#160;ein&#160;<br/>
+verschlüsselter&#160;„<b>Tunnel</b>“&#160;geschaffen<br/>
+•&#160;Die&#160;Daten&#160;werden&#160;durch&#160;spezielle&#160;<br/>
+<b>Authentifizierungen&#160;</b>(in&#160;Form&#160;von&#160;<br/>
+Header-Bestandteilen)&#160;und&#160;<br/>
+Verschlüsselung&#160;gesichert&#160;<br/>
+46<br/>
+<hr/>
+<a name=47></a><img src="headeranalyse/header-47_1.png"/><br/>
+<img src="headeranalyse/header-47_2.png"/><br/>
+<img src="headeranalyse/header-47_3.png"/><br/>
+VPN-Aufbau<br/>
+•&#160;<b>VPN&#160;</b>nutzt&#160;zum&#160;Aufbau&#160;entweder&#160;<b>PPTP</b><br/>
+(Point-To-Point-Tunneling&#160;Protocoll)&#160;<br/>
+oder&#160;<b>L2TP/IPSec</b><br/>
+•&#160;PPTP&#160;„packt“&#160;die&#160;Daten&#160;innerhalb&#160;eines&#160;<br/>
+IP-Pakets&#160;mit&#160;Verschlüsselung&#160;ein<br/>
+•&#160;Probleme:<br/>
+–&#160;Kann&#160;ohne&#160;Passwortabfrage,&#160;mit&#160;<br/>
+Challenge-<br/>
+Response-Verfahren&#160;oder&#160;mit&#160;<br/>
+Authentifizierung&#160;durch&#160;Smartcard&#160;<br/>
+verwendet&#160;werden&#160;→&#160;<b>unsicher</b><br/>
+–&#160;Nutzt&#160;RC4-Verschlüsselung,&#160;Teil&#160;des&#160;<br/>
+Schlüssels&#160;ist&#160;unverschlüsselt&#160;→&#160;<b>unsicher</b><br/>
+–&#160;PPTP&#160;nutzt&#160;keinen&#160;speziﬁschen&#160;Port&#160;→&#160;<br/>
+<b>unsicher&#160;</b>bei&#160;Übertragung&#160;über&#160;Gateways<br/>
+47<br/>
+<hr/>
+<a name=48></a><img src="headeranalyse/header-48_1.png"/><br/>
+<img src="headeranalyse/header-48_2.png"/><br/>
+<img src="headeranalyse/header-48_3.png"/><br/>
+L2TP/IPSec&#160;bei VPN<br/>
+•&#160;<b>L2TP&#160;</b>arbeitet&#160;in&#160;Kombination&#160;mit&#160;<br/>
+IPSec<br/>
+•&#160;Dazu&#160;wird&#160;dem&#160;IP-Header&#160;ein&#160;L2-<br/>
+Header&#160;zum&#160;Verbindungsaufbau&#160;<br/>
+mehrerer&#160;VPN-Tunnel&#160;<br/>
+vorangestellt<br/>
+•&#160;L2-Header&#160;dient&#160;der&#160;<br/>
+Authentifikation,&#160;hat&#160;keine&#160;<br/>
+Verschlüsselung<br/>
+48<br/>
+<hr/>
+<a name=49></a><img src="headeranalyse/header-49_1.png"/><br/>
+<img src="headeranalyse/header-49_2.png"/><br/>
+<img src="headeranalyse/header-49_3.png"/><br/>
+L2TP/IPSec&#160;bei VPN<br/>
+•&#160;IPSec&#160;fügt&#160;Verschlüsselung&#160;hinzu&#160;<br/>
+durch&#160;ESP-Header&#160;(Encapsulating<br/>
+Security Payload)<br/>
+•&#160;Dieser&#160;wird&#160;den&#160;Nutzerdaten&#160;<br/>
+vorangestellt<br/>
+•&#160;Kann&#160;unterschiedliche&#160;<br/>
+<b>Verschlüsselungssysteme&#160;</b>nutzen&#160;<br/>
+(min.&#160;<b>DES</b>,&#160;Standard&#160;<b>AES</b>)<br/>
+•&#160;Jedes&#160;Paket&#160;wird&#160;entsprechend&#160;<br/>
+verschlüsselt&#160;→&#160;führt&#160;zu&#160;<br/>
+Verlängerung&#160;der&#160;Laufzeit<br/>
+49<br/>
+<hr/>
+<a name=50></a><img src="headeranalyse/header-50_1.png"/><br/>
+<img src="headeranalyse/header-50_2.png"/><br/>
+<img src="headeranalyse/header-50_3.png"/><br/>
+ESP-Header<br/>
+•&#160;<b>SPI</b>:&#160;Identifizierung&#160;in&#160;Verbindung&#160;mit&#160;<br/>
+IP-Adresse&#160;und&#160;Sicherheitsprotokoll<br/>
+•&#160;Sequenznummer:&#160;Ansteigende&#160;<br/>
+Nummer,&#160;schützt&#160;vor&#160;Replay<br/>
+•&#160;Payload:&#160;Nutzerdaten<br/>•&#160;Padding:&#160;Durch&#160;Chiffre&#160;genutzt,&#160;um&#160;<br/>
+Daten&#160;bis&#160;zum&#160;Rest&#160;des&#160;Datenblocks&#160;<br/>
+aufzufüllen&#160;(0&#160;–&#160;255&#160;Bytes)<br/>
+•&#160;Länge&#160;Füllung&#160;(pad&#160;length):&#160;Anzahl&#160;der&#160;<br/>
+padding-bytes<br/>
+•&#160;next&#160;header:&#160;Identifizierung&#160;von&#160;ESP<br/>•&#160;authentification&#160;data:&#160;Werte&#160;des&#160;<br/>
+Integritätstests<br/>
+50<br/>
+<hr/>
+<a name=51></a><img src="headeranalyse/header-51_1.png"/><br/>
+<img src="headeranalyse/header-51_2.png"/><br/>
+<img src="headeranalyse/header-51_3.png"/><br/>
+<img src="headeranalyse/header-51_4.png"/><br/>
+IPSec<br/>
+•&#160;IPSec&#160;unterscheidet&#160;zwischen&#160;<br/>
+Transport-&#160;und&#160;Tunnelmodus&#160;<br/>
+•&#160;<b>Transport:&#160;P2P-Verbindung<br/></b>•&#160;<b>Tunnel:&#160;Verbindung&#160;</b><br/>
+<b>zwischen&#160;Netzwerken</b><br/>
+•&#160;Bei&#160;Tunnel-Modus&#160;werden&#160;<br/>
+die&#160;IP-Adressen&#160;weiter&#160;<br/>
+enkapselt,&#160;äußerer&#160;IP-Header&#160;<br/>
+dient&#160;der&#160;Verbindung&#160;<br/>
+zwischen&#160;den&#160;„Tunnelenden“,&#160;<br/>
+innerer&#160;IP-Header&#160;dient&#160;zur&#160;<br/>
+Adressierung&#160;innerhalb&#160;des&#160;<br/>
+Netzwerks&#160;<br/>
+51<br/>
+<hr/>
+<a name=52></a><img src="headeranalyse/header-52_1.png"/><br/>
+<img src="headeranalyse/header-52_2.png"/><br/>
+Netzwerktraffic&#160;analysieren mit&#160;<br/>
+Wireshark<br/>
+Planung&#160;–&#160;Installation&#160;–&#160;Anwendung&#160;<br/>
+52<br/>
+<hr/>
+<a name=53></a><img src="headeranalyse/header-53_1.png"/><br/>
+<img src="headeranalyse/header-53_2.png"/><br/>
+<b>Wireshark</b><br/>
+•&#160;Wireshark&#160;ist&#160;ein&#160;<b>Network-Sniffer</b>,&#160;d.h.&#160;er&#160;dient&#160;zum&#160;<b>Mitschnitt&#160;des&#160;</b><br/>
+<b>Protokollverkehrs&#160;innerhalb&#160;eines&#160;Netzwerksegments</b>.<br/>
+•&#160;Die&#160;App nimmt&#160;dabei&#160;jeden&#160;an&#160;den&#160;Port&#160;gerichteten&#160;Verkehr&#160;auf.<br/>
+•&#160;Dabei&#160;können&#160;die&#160;entsprechenden&#160;Daten&#160;anhand&#160;ihrer&#160;Protokoll-Header&#160;<br/>
+analysiert&#160;werden&#160;→&#160;Welche&#160;Protokolle&#160;verbinden&#160;welchen&#160;Dienst&#160;mit&#160;<br/>welchem&#160;Rechner&#160;innerhalb/außerhalb&#160;des&#160;Netzwerks<br/>
+•&#160;<b>Dies&#160;sind&#160;immer&#160;sicherheitsrelevante&#160;Daten!&#160;Niemals&#160;Wireshark&#160;</b><br/>
+<b>„einfach&#160;so“&#160;verwenden!&#160;Kündigungsgrund&#160;/&#160;Justiziabel!</b><br/>
+53<br/>
+<hr/>
+<a name=54></a><img src="headeranalyse/header-54_1.png"/><br/>
+<img src="headeranalyse/header-54_2.png"/><br/>
+<b>Wireshark</b><br/>
+•&#160;Unter&#160;https://www.wireshark.org/&#160;kann&#160;die aktuelle&#160;Wireshark-<br/>
+Version&#160;heruntergeladen&#160;werden.<br/>
+•&#160;Bei&#160;der&#160;Installation&#160;von Wireshark&#160;wird&#160;<b>zusätzlich&#160;</b>noch&#160;<b>WinPcap</b><br/>
+(Library&#160;mit&#160;den Protokollinformationen)&#160;benötigt.<br/>
+•&#160;OpenSource&#160;für&#160;beinahe&#160;alle OS.<br/>
+54<br/>
+<hr/>
+<a name=55></a><img src="headeranalyse/header-55_1.png"/><br/>
+<img src="headeranalyse/header-55_2.png"/><br/>
+<img src="headeranalyse/header-55_3.png"/><br/>
+<img src="headeranalyse/header-55_4.png"/><br/>
+Erste&#160;Schritte<br/>
+•&#160;Startbildschirm&#160;zeigt&#160;die&#160;<br/>
+abhörbaren&#160;Schnittstellen.<br/>
+•&#160;Durch&#160;Graph&#160;wird&#160;<br/>
+angezeigt,&#160;ob Schnittstelle&#160;<br/>
+mit&#160;Netzwerk&#160;verbunden.&#160;<br/>
+55<br/>
+<hr/>
+<a name=56></a><img src="headeranalyse/header-56_1.png"/><br/>
+<img src="headeranalyse/header-56_2.png"/><br/>
+<img src="headeranalyse/header-56_3.png"/><br/>
+<img src="headeranalyse/header-56_4.png"/><br/>
+<img src="headeranalyse/header-56_5.png"/><br/>
+<img src="headeranalyse/header-56_6.png"/><br/>
+Erste&#160;Schritte<br/>
+•&#160;Drei&#160;Anzeigen&#160;bei&#160;der&#160;<br/>
+Paket-Analyse<br/>
+1.<br/>
+1.&#160;Paketliste:&#160;Zeigt&#160;die&#160;<br/>
+aufgefangenen&#160;PDU<br/>
+2.<br/>
+2.&#160;Paket-Details:&#160;Das einzelne,&#160;<br/>
+in&#160;1 angeklickte&#160;PDU&#160;wird&#160;<br/>
+angezeigt<br/>
+3.&#160;Paket-Rohdaten:&#160;<br/>
+Darstellung&#160;des Datensatz&#160;<br/>
+3.<br/>
+in&#160;HEX&#160;in&#160;32&#160;Bit<br/>
+56<br/>
+<hr/>
+<a name=57></a><img src="headeranalyse/header-57_1.png"/><br/>
+<img src="headeranalyse/header-57_2.png"/><br/>
+<img src="headeranalyse/header-57_3.png"/><br/>
+<img src="headeranalyse/header-57_4.png"/><br/>
+<img src="headeranalyse/header-57_5.png"/><br/>
+Standard-Schaltflächen<br/>
+Optionen&#160;für&#160;<br/>
+Open&#160;/&#160;Save&#160;/&#160;<br/>
+Aufnahme<br/>
+Close&#160;/&#160;Reload&#160;file<br/>
+Aufnahme&#160;<br/>
+Paket&#160;suchen,&#160;<br/>
+Zeige&#160;immer die&#160;<br/>
+voriges,&#160;nächstes,&#160;<br/>
+neueste&#160;<br/>
+Übersicht&#160;der PDUs&#160;<br/>
+Aufnahme&#160;<br/>
+stoppen<br/>
+goto&#160;No.,&#160;erstes,&#160;<br/>
+aufgefangene&#160;PDU<br/>
+(Standard)<br/>
+starten<br/>
+letztes<br/>
+57<br/>
+<hr/>
+<a name=58></a><img src="headeranalyse/header-58_1.png"/><br/>
+<img src="headeranalyse/header-58_2.png"/><br/>
+<img src="headeranalyse/header-58_3.png"/><br/>
+<img src="headeranalyse/header-58_4.png"/><br/>
+<img src="headeranalyse/header-58_5.png"/><br/>
+Filterleiste<br/>
+•&#160;Durch&#160;Filter&#160;können&#160;<br/>
+schnell&#160;die&#160;<br/>
+empfangenen&#160;DPUs&#160;<br/>
+gefiltert&#160;werden.<br/>
+•&#160;Filter&#160;sind&#160;z.B.&#160;<br/>
+Protokollnamen<br/>
+•&#160;Dropdown-Menü&#160;<br/>
+hilft.&#160;<br/>
+58<br/>
+<hr/>
+<a name=59></a><img src="headeranalyse/header-59_1.png"/><br/>
+<img src="headeranalyse/header-59_2.png"/><br/>
+<b>Übungen&#160;mit&#160;Wireshark</b><br/>
+1.<br/>
+Schalten&#160;Sie&#160;sämtliche&#160;Programme&#160;mit&#160;Ausnahme&#160;von&#160;Wireshark&#160;aus.&#160;Wie&#160;viel&#160;DPUs&#160;kommen&#160;bei&#160;<br/>Ihnen&#160;an&#160;pro&#160;min?<br/>
+2.<br/>
+Schalten&#160;Sie&#160;jetzt&#160;alle&#160;Apps&#160;ein,&#160;die&#160;Sie&#160;normalerweise&#160;eingeschaltet&#160;haben.&#160;Schneiden&#160;Sie&#160;diesen&#160;<br/>Verkehr&#160;für&#160;1&#160;min&#160;mit.&#160;Was&#160;hat&#160;sich&#160;verändert?<br/>
+3.<br/>
+Öffnen&#160;Sie&#160;die&#160;Kommandozeile&#160;bei&#160;Windows.&#160;Starten&#160;Sie&#160;eine&#160;neue&#160;Aufnahme&#160;in&#160;Wireshark&#160;und&#160;<br/>führen&#160;Sie&#160;in&#160;der&#160;Kommandozeile&#160;einen&#160;Ping&#160;aus.<br/>
+4.<br/>
+Starten&#160;Sie&#160;eine&#160;weitere&#160;Aufnahme&#160;in&#160;Wireshark.&#160;Führen&#160;Sie&#160;einen&#160;Tracert&#160;zu&#160;google.de&#160;aus&#160;in&#160;der&#160;<br/>Kommandozeile.&#160;<br/>
+59<br/>
+<hr/>
+<a name=60></a><img src="headeranalyse/header-60_1.png"/><br/>
+<img src="headeranalyse/header-60_2.png"/><br/>
+<b>Literatur</b><br/>
+Hauser,&#160;Bernhard&#160;J.&#160;2016:&#160;Netzwerkanalyse&#160;mit&#160;Wireshark&#160;2.0.&#160;Haan-Gruiten:&#160;Europa-Lehrmittel.<br/>Ulf&#160;Lamping,&#160;Richard&#160;Sharpe,&#160;Ed&#160;Warnicke&#160;2014:&#160;Wireshark&#160;Userguide,&#160;<br/>
+unter:https://www.wireshark.org/docs/wsug_html_chunked/,&#160;&#160;zuletzt&#160;besucht&#160;am&#160;13.01.21<br/>Dausch,&#160;Martin&#160;2014:&#160;Netzwerke.&#160;Protokolle&#160;und&#160;Dienste.&#160;Bodenheim:&#160;Herdt.<br/>
+60<br/>
+<hr/>
+</body>
+</html>

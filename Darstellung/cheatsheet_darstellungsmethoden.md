@@ -1,5 +1,8 @@
 # [BACK](../index.html)
 # Inhaltsangabe
+
+- [BACK](#back)
+- [Inhaltsangabe](#inhaltsangabe)
 - [Datenbanken ERM](#datenbanken-erm)
 - [SQL-Datenbankdarstellung](#sql-datenbankdarstellung)
 	- [ER-Chen](#er-chen)
@@ -17,7 +20,6 @@
 *Entity-Relationship-Modell*
 
 Das ERM ist ein Modell(zur Darstellung) von Dingen, Gegenständen, Objekten (= 'entities') und der Beziehung/Zusammenhängen zwischen diesen (= 'relationship'). Es dient dazu, im Rahmen der semantischen (abstrakt, formale Beschreibung / Darstellung eines Ausschnittes) Datenmodellierung vereinfacht darzustellen.
-
 
 [TOP](#)
 
